@@ -1,0 +1,11 @@
+:host button {
+  min-width: 1.75em;
+}
+
+:host button.flower {
+  color: blue;
+}
+
+:host button.season {
+  color: red;
+}

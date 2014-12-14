@@ -1,0 +1,28 @@
+:host {
+  font-family: Verdana;
+}
+
+:host button {
+  text-align: center;
+  font-size: 1em;
+  vertical-align: middle;
+  padding: 0.2em;
+  margin: 0;
+  border: none;
+}
+
+:host button:active {
+  background: pink;
+}
+
+:host button.pressed {
+  background: pink;
+}
+
+:host .hidden {
+  display: none!important;
+}
+
+:host *[disabled] {
+  opacity: 0.5!important;
+}

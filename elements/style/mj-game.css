@@ -1,0 +1,7 @@
+:host {
+  text-align: center;
+}
+
+:host #info {
+  margin: 0.5em 0;
+}

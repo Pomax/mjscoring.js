@@ -1,0 +1,22 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="base.html">
+<link rel="import" href="mj-score-entry.html">
+
+<polymer-element name="mj-score-history" extends="mj-base">
+  <template>
+    <link rel="stylesheet" href="style/mj-ui.css">
+    <link rel="stylesheet" href="style/mj-score-history.css">
+    <div id="track"></div>
+  </template>
+
+  <script>
+    Polymer("mj-score-history", {
+      recordHand: function(hand) {
+        var entry = document.createElement("mj-score-entry");
+        entry.setHand(hand);
+        this.$.track.appendChild(entry);
+      }
+    });
+  </script>
+
+</polymer-element>

@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="mj-limit">
+
+  <template>
+    <link rel="stylesheet" href="style/mj-limit.css">
+
+    <select id="limits">
+      <option>--- limit hands ---</option>
+    </select>
+
+  </template>
+
+  <script>
+    Polymer("mj-limit", {
+      domReady: function() {
+        this.sel = this.$.limits;
+      },
+      reset: function() {
+        this.sel.selectedIndex = 0;
+      },
+      getLimit: function() {
+        var opt = this.sel.selectedIndex;
+        if(opt===0) return false;
+        return this.sel.options[opt].textContent;
+      },
+      useRules: function(rules) {
+        var self = this;
+        var limits = rules.limits();
+        Object.keys(limits).forEach(function(limit) {
+          var option = document.createElement("option");
+          option.textContent = limit;
+          self.sel.appendChild(option);
+        });
+      }
+    });
+  </script>
+
+</polymer-element>

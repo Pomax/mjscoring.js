@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="base.html">
+
+<polymer-element name="mj-score-entry" extends="mj-base" attributes="tiles amount log winner">
+  <template>
+    <link rel="stylesheet" href="style/mj-ui.css">
+    <link rel="stylesheet" href="style/mj-score-entry.css">
+    <div id="info" data-winner="{{winner}}" data-amount="{{amount}}"> points</div>
+    <div id="log" class="hidden">tiles: {{ tiles }}
+{{log}}</div>
+  </template>
+
+  <script>
+    Polymer("mj-score-entry", {
+      domReady: function() {
+        var info = this.$.info;
+        var log = this.$.log;
+        this.$.info.onclick = function(evt) {
+          var e = evt.target;
+          if(e===log || e===info) { log.classList.toggle("hidden"); }
+          else { log.classList.add("hidden"); }
+        };
+      },
+      setHand: function(hand) {
+        if(hand.winner) { this.set("winner", true); }
+        this.set("amount", hand.amount);
+        this.set("tiles", hand.tiles || 'nothing in hand');
+        this.set("log", hand.log.join('\n'));
+      }
+    });
+  </script>
+
+</polymer-element>

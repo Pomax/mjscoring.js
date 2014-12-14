@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="mj-win-modifiers" extends="mj-base">
+
+  <template>
+    <link rel="stylesheet" href="style/mj-ui.css">
+    <link rel="stylesheet" href="style/mj-win-modifiers.css">
+    <div id="buttons"></div>
+  </template>
+
+  <script>
+    Polymer("mj-win-modifiers", {
+      domReady: function() {
+        var self = this;
+        var div = self.$.buttons;
+        self.buttons = {
+          "selfdrawn": false,
+          "pair": false,
+          "major": false,
+          "onechance": false,
+          "lastwall": false,
+          "lastdiscard": false,
+          "supplement": false,
+          "kongrob": false,
+          "turnone": false
+        };
+        Object.keys(self.buttons).forEach(function(op) {
+          var button = document.createElement("button");
+          button.id = op;
+          button.textContent = op;
+          button.addEventListener("click", self.press);
+          div.appendChild(button);
+          self.buttons[op] = button;
+        });
+      },
+      getExtras: function() {
+        var self = this;
+        var extras = {}
+        Object.keys(self.buttons).forEach(function(op) {
+          var button = self.buttons[op];
+          extras[op] = button.classList.contains("pressed");
+        });
+        return extras;
+      },
+      reset: function() {
+        var self = this;
+        Object.keys(this.buttons).forEach(function(op) {
+          self.unpress(self.buttons[op]);
+        });
+      }
+    });
+  </script>
+
+</polymer-element>

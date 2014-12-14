@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="base.html">
+<link rel="import" href="mj-score-history.html">
+
+<polymer-element name="mj-scoring-area" extends="mj-base">
+
+  <template>
+    <link rel="stylesheet" href="style/mj-ui.css">
+    <link rel="stylesheet" href="style/mj-scoring-area.css">
+    <div id="scores"></div>
+  </template>
+
+  <script>
+    Polymer("mj-scoring-area", {
+      bindPlayers: function(players) {
+        var self = this;
+        players.forEach(function(p,idx) {
+          var history = document.createElement("mj-score-history");
+          self.$.scores.appendChild(history);
+          p.setHistory(history);
+        })
+      }
+    });
+  </script>
+
+</polymer-element>

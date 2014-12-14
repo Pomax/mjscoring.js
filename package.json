@@ -1,0 +1,11 @@
+{
+  "name": "mjscoring.js",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Mahjong scoring using javascript",
+  "scripts": {
+    "test": "browserify src/Game.js -o mjscore.js --standalone MJScore"
+  },
+  "author": "",
+  "license": "ISC"
+}

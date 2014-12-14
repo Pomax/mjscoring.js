@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host input[type=text] {
+  width: calc(100% - 8em);
+}

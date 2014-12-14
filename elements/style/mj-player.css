@@ -1,0 +1,40 @@
+:host {
+  display: inline-block;
+  border: 1px solid black;
+  margin: 0.05em;
+  padding: 4px;
+}
+
+:host mj-set {
+  margin: 0.25em 0;
+}
+
+:host #playerinfo {
+  margin-bottom: 0.5em;
+}
+
+:host #name {
+  width: 8em;
+  border-width: 0 0 1px 0;
+  text-align: center;
+}
+
+:host #wind, #wins {
+  width: 1em;
+  text-align: center;
+  border: none;
+}
+
+:host #scoring {
+  font-size: 90%;
+}
+
+:host span.wind0 { color: transparent; }
+:host span.wind1 { color: transparent; }
+:host span.wind2 { color: transparent; }
+:host span.wind3 { color: transparent; }
+
+:host span.wind0:before { content: '東'; font-weight: bold; color: black; }
+:host span.wind1:before { content: '南'; font-weight: bold; color: black; }
+:host span.wind2:before { content: '西'; font-weight: bold; color: black; }
+:host span.wind3:before { content: '北'; font-weight: bold; color: black; }
