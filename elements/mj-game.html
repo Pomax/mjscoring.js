@@ -3,6 +3,7 @@
 <link rel="import" href="mj-player.html">
 <link rel="import" href="mj-win-modifiers.html">
 <link rel="import" href="mj-scoring-area.html">
+<link rel="import" href="mj-rules.html">
 
 <polymer-element name="mj-game" extends="mj-base" attributes="round windoftheround draws" round="-" draws="0" windoftheround="-">
 
@@ -33,16 +34,16 @@
       <mj-win-modifiers id="extras"></mj-win-modifiers>
     </div>
 
+    <mj-rules id="rules"></mj-rules>
+
     <mj-scoring-area id="scoring"></mj-scoring-area>
 
   </template>
 
-  <script src="../mjscoring.js"></script>
-
   <script>
     Polymer("mj-game", {
       ready: function() {
-        this.rules = new MJScoring("ChineseClassical");
+        this.rules = this.$.rules;
       },
 
       domReady: function() {
