@@ -1,9 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="base.html">
+<!--
 <link rel="import" href="mj-bonus.html">
 <link rel="import" href="mj-set.html">
 <link rel="import" href="mj-limit.html">
-
+-->
 <polymer-element name="mj-player" extends="mj-base" attributes="name score wins wind east" score="-" wins="-" wind="-">
 
   <template>
@@ -16,33 +17,32 @@
       <span id="scoring">score: {{score}}/{{wins}}</span>
     </div>
 
-    <!-- bonus tiles -->
+<!--
     <mj-bonus></mj-bonus>
 
-    <!-- we need five sets -->
     <mj-set></mj-set>
     <mj-set></mj-set>
     <mj-set></mj-set>
     <mj-set></mj-set>
     <mj-set></mj-set>
 
-    <!-- nine tile error! -->
     <button id="ninetile" disabled>nine tile error!</button>
 
-    <!-- illegal win! -->
     <button id="illegal" disabled>illegal win declaration!</button>
 
-    <!-- limit hand? -->
     <mj-limit id="limit"></mj-limit>
-
+-->
   </template>
 
   <script>
     Polymer("mj-player", {
       domReady: function() {
         var self = this;
+/*
         this.bonus = this.find("mj-bonus")[0];
         this.sets = this.find("mj-set");
+        this.limit = this.$.limit;
+*/
       },
       reset: function(score, wind, resetwins) {
         if (arguments.length > 0) {
@@ -51,7 +51,7 @@
           this.set("wins",0);
         }
         this.bonus.reset();
-        this.$.limit.reset();
+        this.limit.reset();
         this.sets.forEach(function(set) { set.reset(); });
       },
       markEast: function() {
@@ -69,10 +69,10 @@
         return this.bonus;
       },
       getLimit: function() {
-        return this.$.limit.getLimit();
+        return this.limit.getLimit();
       },
       useRules: function(rules) {
-        this.$.limit.useRules(rules);
+        this.limit.useRules(rules);
       },
       getPoints: function(amount) {
         this.adjust("score", amount);

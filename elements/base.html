@@ -15,11 +15,11 @@
       },
 
       listen: function(e, n, f) {
-        e.addEventListener(n, f);
+        if(e) e.addEventListener(n, f);
       },
 
       forget: function(e, n, f) {
-        e.removeEventListener(n, f);
+        if(e) e.removeEventListener(n, f);
       },
 
       unpress: function(b) {
