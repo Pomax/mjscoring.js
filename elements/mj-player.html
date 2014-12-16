@@ -43,7 +43,6 @@
         var self = this;
         this.bonus = this.find("mj-bonus")[0];
         this.sets = this.find("mj-set");
-        this.limit = this.$.limit;
       },
       reset: function(score, wind, resetwins) {
         if (arguments.length > 0) {
@@ -52,7 +51,7 @@
           this.set("wins",0);
         }
         this.bonus.reset();
-        this.limit.reset();
+        this.$.limit.reset();
         this.sets.forEach(function(set) { set.reset(); });
       },
       markEast: function() {
@@ -70,10 +69,10 @@
         return this.bonus;
       },
       getLimit: function() {
-        return this.limit.getLimit();
+        return this.$.limit.getLimit();
       },
       useRules: function(rules) {
-        this.limit.useRules(rules);
+        this.$.limit.useRules(rules);
       },
       getPoints: function(amount) {
         this.adjust("score", amount);
