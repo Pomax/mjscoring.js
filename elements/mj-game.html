@@ -1,11 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="base.html">
 <link rel="import" href="mj-player.html">
-<!--
 <link rel="import" href="mj-win-modifiers.html">
-<link rel="import" href="mj-scoring-area.html">
 <link rel="import" href="mj-rules.html">
--->
+<link rel="import" href="mj-scoring-area.html">
 
 <polymer-element name="mj-game" extends="mj-base" attributes="round windoftheround draws" round="-" draws="0" windoftheround="-">
 
@@ -23,7 +21,6 @@
       <mj-player></mj-player>
     </div>
 
-<!--
     <div id="buttons">
       <button id="start">New Game</button>
       -
@@ -39,7 +36,6 @@
     <mj-rules id="rules"></mj-rules>
 
     <mj-scoring-area id="scoring"></mj-scoring-area>
--->
   </template>
 
   <script>
@@ -50,7 +46,6 @@
 
       domReady: function() {
         var self = this;
-/*
         this.players = this.find("mj-player");
         ["start", "reset",  "draw", "score"].forEach(function(n) {
           self.listen(self.$[n], "click", self[n].bind(self));
@@ -60,7 +55,6 @@
         });
         this.$.scoring.bindPlayers(this.players);
         this.start();
-*/
       },
 
       start: function(evt) {

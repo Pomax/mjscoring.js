@@ -13,11 +13,9 @@
 
   <script>
     Polymer("mj-rules", {
-      domReady: function() {
+      limits: function() {
         this.ruleset = this.$.rules.children[0];
         this.base = this.ruleset.base;
-      },
-      limits: function() {
         return this.ruleset.limits;
       },
       rotate: function(wind) {

@@ -1,10 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="base.html">
-<!--
 <link rel="import" href="mj-bonus.html">
 <link rel="import" href="mj-set.html">
 <link rel="import" href="mj-limit.html">
--->
+
 <polymer-element name="mj-player" extends="mj-base" attributes="name score wins wind east" score="-" wins="-" wind="-">
 
   <template>
@@ -17,8 +16,7 @@
       <span id="scoring">score: {{score}}/{{wins}}</span>
     </div>
 
-<!--
-    <mj-bonus></mj-bonus>
+    <mj-bonus id="bonus"></mj-bonus>
 
     <mj-set></mj-set>
     <mj-set></mj-set>
@@ -31,18 +29,15 @@
     <button id="illegal" disabled>illegal win declaration!</button>
 
     <mj-limit id="limit"></mj-limit>
--->
   </template>
 
   <script>
     Polymer("mj-player", {
       domReady: function() {
         var self = this;
-/*
-        this.bonus = this.find("mj-bonus")[0];
+        this.bonus = this.$.bonus;
         this.sets = this.find("mj-set");
         this.limit = this.$.limit;
-*/
       },
       reset: function(score, wind, resetwins) {
         if (arguments.length > 0) {
@@ -72,7 +67,7 @@
         return this.limit.getLimit();
       },
       useRules: function(rules) {
-        this.limit.useRules(rules);
+        this.$.limit.useRules(rules);
       },
       getPoints: function(amount) {
         this.adjust("score", amount);

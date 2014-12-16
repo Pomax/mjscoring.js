@@ -1,5 +1,6 @@
-:host {
-  font-family: Verdana;
+* {
+  font-family: Verdana, "MS Mincho";
+  font-size: 11pt;
 }
 
 :host button {

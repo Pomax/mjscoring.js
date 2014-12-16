@@ -13,16 +13,13 @@
 
   <script>
     Polymer("mj-limit", {
-      domReady: function() {
-        this.sel = this.$.limits;
-      },
       reset: function() {
-        this.sel.selectedIndex = 0;
+        this.$.limits.selectedIndex = 0;
       },
       getLimit: function() {
-        var opt = this.sel.selectedIndex;
+        var opt = this.$.limits.selectedIndex;
         if(opt===0) return false;
-        return this.sel.options[opt].textContent;
+        return this.$.limits.options[opt].textContent;
       },
       useRules: function(rules) {
         var self = this;
@@ -30,7 +27,7 @@
         Object.keys(limits).forEach(function(limit) {
           var option = document.createElement("option");
           option.textContent = limit;
-          self.sel.appendChild(option);
+          self.$.limits.appendChild(option);
         });
       }
     });
