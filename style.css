@@ -1,0 +1,221 @@
+/*
+  Universal styling
+*/
+
+#app {
+  text-align: center;
+}
+
+* {
+  font-family: Verdana, "MS Mincho";
+  font-size: 10pt;
+}
+
+body > h1 {
+  font-size:110%;
+  text-align: center;
+}
+
+button {
+  text-align: center;
+  font-size: 1em;
+  vertical-align: middle;
+  padding: 0.2em;
+  margin: 1px;
+  border: 1px solid darkgrey;
+  box-model: border-box;
+}
+
+button + button {
+  margin-left: 1px;
+}
+
+button:active {
+  background: pink;
+}
+
+button.pressed {
+  background: pink;
+}
+
+.hidden {
+  display: none!important;
+}
+
+*[disabled] {
+  opacity: 0.5!important;
+}
+
+
+/*
+  Game styling
+*/
+
+.game {
+  text-align: center;
+}
+
+.game .info {
+  margin: 0.5em 0;
+}
+
+.game .winmodifiers {
+  display: inline-block;
+}
+
+.game .score {
+  background: #A9E9A3;
+  margin: 1em;
+}
+
+/*
+  Keep the winds human readable, even if the source says they're numbers
+*/
+span.wind0 { color: transparent; }
+span.wind1 { color: transparent; }
+span.wind2 { color: transparent; }
+span.wind3 { color: transparent; }
+
+span.wind0:before { content: '東'; font-weight: bold; color: black; }
+span.wind1:before { content: '南'; font-weight: bold; color: black; }
+span.wind2:before { content: '西'; font-weight: bold; color: black; }
+span.wind3:before { content: '北'; font-weight: bold; color: black; }
+
+/*
+  Player styling
+*/
+
+.player {
+  display: inline-block;
+  border: 1px solid black;
+  margin: 0.05em;
+  padding: 4px;
+}
+
+.player set {
+  margin: 0.25em 0;
+}
+
+.player .playerinfo {
+  margin-bottom: 0.5em;
+}
+
+.player .name {
+  width: 8em;
+  border-width: 0 0 1px 0;
+  text-align: center;
+}
+
+.player .wind,
+.player .wins {
+  width: 1em;
+  text-align: center;
+  border: none;
+}
+
+.player .scoring {
+  font-size: 90%;
+}
+
+/*
+  Player set styling
+*/
+
+.set {
+  display: block;
+  width: 100%;
+}
+
+.set input {
+  display: inline-block;
+}
+
+.set input[type=text] {
+  width: calc(100% - 9em);
+  margin: 0;
+  padding: 0;
+  border: 1px solid grey;
+  height: 2em;
+  vertical-align: bottom;
+}
+
+.set .suit {
+  vertical-align: middle;
+  width:  2em;
+  height: 2em;
+}
+
+.set input[type=checkbox] {
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+}
+
+/*
+  Bonus tiles
+*/
+
+.bonus button {
+  min-width: 1.75em;
+}
+
+.bonus div {
+  display: inline-block;
+}
+
+.bonus .flowers button {
+  color: blue;
+}
+
+.bonus .seasons button {
+  color: red;
+}
+
+/*
+  Limit hand picker
+*/
+
+select.limits {
+  display: block;
+  margin-top: 0.5em;
+  width: 100%;
+}
+
+/*
+  Scoring
+*/
+.scoring-history {
+  display: inline-block;
+  margin: 0.5em;
+  padding: 4px;
+  vertical-align: top;
+}
+
+.scoring-history .entry {
+  display: block;
+  border: 1px solid black;
+  padding: 2px;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+  font-size: 80%;
+}
+
+.scoring-history entry .tiles {
+  font-family: monospace;
+}
+
+.scoring-history .entry .info:before {
+  content: attr(data-amount);
+}
+
+.scoring-history .entry .info[data-winner=true]:before {
+  font-weight: bold;
+}
+
+.scoring-history .entry .log {
+  margin-top: 0.2em;
+  white-space: pre;
+  text-align: left;
+  color: #222;
+  background: #DDD;
+}
