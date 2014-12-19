@@ -17,9 +17,9 @@ var Set = React.createClass({
     return (
       <div className="set">
         <input ref="tiles" type="text" value={this.state.set} onChange={this.updateSet} />
-        <button className="suit" ref="characters" onClick={this.press}>満</button>
-        <button className="suit" ref="bamboo" onClick={this.press}>竹</button>
-        <button className="suit" ref="dots" onClick={this.press}>◎</button>
+        <button className="characters suit" ref="characters" onClick={this.press}>満</button>
+        <button className="bamboo suit" ref="bamboo" onClick={this.press}>竹</button>
+        <button className="dots suit" ref="dots" onClick={this.press}>◎</button>
         <input ref="concealed" type="checkbox" checked={this.state.concealed} onChange={this.toggleConcealed} />
       </div>
     );

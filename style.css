@@ -31,7 +31,7 @@ button + button {
 }
 
 button:active {
-  background: pink;
+  background: darkgrey;
 }
 
 button.pressed {
@@ -106,7 +106,7 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 }
 
 .player .name {
-  width: 8em;
+  width: 10em;
   border-width: 0 0 1px 0;
   text-align: center;
 }
@@ -150,6 +150,21 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
   height: 2em;
 }
 
+.set button.suit.characters.pressed {
+  background: rgba(205,0,0,0.5);
+  color: #901616;
+}
+
+.set button.suit.bamboo.pressed {
+  background: rgba(0,100,0,0.4);
+  color: #627146;
+}
+
+.set button.suit.dots.pressed {
+  background: rgba(0,60,175,0.4);
+  color: #5C6196;
+}
+
 .set input[type=checkbox] {
   vertical-align: middle;
   width: 1em;
@@ -172,9 +187,20 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
   color: blue;
 }
 
+.bonus .flowers button.pressed {
+  background: rgba(110,150,255,0.5);
+  color: white;
+}
+
 .bonus .seasons button {
   color: red;
 }
+
+.bonus .seasons button.pressed {
+  background: rgba(255,50,50,0.5);
+  color: white;
+}
+
 
 /*
   Limit hand picker
