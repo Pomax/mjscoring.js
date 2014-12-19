@@ -88,8 +88,13 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 .player {
   display: inline-block;
   border: 1px solid black;
-  margin: 0.05em;
   padding: 4px;
+  overflow: hidden;
+}
+
+.pwidth {
+  margin: 0.05em;
+  width: 20.5em;
 }
 
 .player set {
@@ -186,7 +191,6 @@ select.limits {
 */
 .scoring-history {
   display: inline-block;
-  margin: 0.5em;
   padding: 4px;
   vertical-align: top;
 }
@@ -218,4 +222,5 @@ select.limits {
   text-align: left;
   color: #222;
   background: #DDD;
+  border-top: 1px solid #666;
 }

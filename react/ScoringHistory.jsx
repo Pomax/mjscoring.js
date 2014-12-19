@@ -8,7 +8,7 @@ var ScoringHistory = React.createClass({
 
   render: function() {
     return (
-      <div ref="history" className="scoring-history">
+      <div ref="history" className="scoring-history pwidth">
       {this.state.hands.map(function(handData) {
         return <ScoringEntry data={handData} />;
       })}

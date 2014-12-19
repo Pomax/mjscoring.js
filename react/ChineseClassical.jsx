@@ -82,10 +82,14 @@ var ChineseClassical = React.createClass({
       winner: false,
       log: [],
       sets: [],
-      getHand: function(doubled) {
+      getHand: function() {
         return {
           winner: score.winner,
-          amount: score.value + (doubled?' (x2 = '+(2*score.value)+')':''),
+          values: {
+            tilepoints: score.tilepoints,
+            amount: score.value,
+            balance: score.balance
+          },
           tiles: score.sets.map(function(set) {
             var tiles = set.tiles.join('');
             if(set.suit) { tiles = set.suit.substring(0,1) + '.' + tiles; }
@@ -311,6 +315,9 @@ var ChineseClassical = React.createClass({
     if(extras.supplement) self.scoreDoubles(score, 1, "winning on a supplement tile");
     if(extras.kongrob) self.scoreDoubles(score, 1, "robbing a kong to win");
     if(extras.turnone) self.scoreDoubles(score, 1, "ready on turn one");
+
+    // and finally, 1 double for winning as east
+    if(ownwind === 0) self.scoreDoubles(score, 1, "winning as east");
   },
 
   award: function(players, scores, scoringarea) {
@@ -336,7 +343,10 @@ var ChineseClassical = React.createClass({
     });
 
     // how many points is the winner owed?
-    var winvalue = scores[winneridx].value * (eastwon?2:1);
+    var winvalue = scores[winneridx].value;
+
+    // how much do the other players win/lose?
+    var balance = [0,0,0,0];
 
     // Do we have a nine tile error situation?
     if(ninetile) {
@@ -344,9 +354,8 @@ var ChineseClassical = React.createClass({
       // number of points owed to it by all players.
       // Such is the penalty of the nine tile error.
       winvalue = 4 * winvalue;
-      winner.receivePoints(winvalue);
-      ninetile.receivePoints(-winvalue);
-      scores[ninetileidx].value -= winvalue;
+      balance[winneridx] = winvalue;
+      balance[ninetileidx] = -winvalue;
       this.scorePoints(scores[ninetileidx], -winvalue, "fascilitating the win");
     }
 
@@ -355,13 +364,17 @@ var ChineseClassical = React.createClass({
     else {
       players.forEach(function(p,idx) {
         if(idx===winneridx) return;
-        var diff = winvalue * (p.currentWind===0?2:1);
+        var diff = winvalue * (p.currentWind === 0 ? 2 : 1); // east pays double if they lose
         p.receivePoints(-diff);
+        balance[idx] += -diff;
+
         winner.receivePoints(diff);
+        balance[winneridx] += diff;
       });
     }
 
     // then scores are settled amongst the losers
+
     var i,j,p1,p2,v1,v2;
     for(i=0; i<4; i++) {
       if(i===winneridx) continue;
@@ -374,14 +387,17 @@ var ChineseClassical = React.createClass({
         diff = v1 - v2;
         if(diff!==0) {
           p1.receivePoints(diff);
+          balance[i] += diff;
           p2.receivePoints(-diff);
+          balance[j] += -diff;
         }
       }
     }
 
     // and finally we chronicle these scores in the scoring area
     players.forEach(function(p, idx) {
-      scoringarea.recordHand(idx, scores[idx].getHand(idx === winneridx && eastwon));
+      scores[idx].balance = balance[idx];
+      scoringarea.recordHand(idx, scores[idx].getHand());
     });
   },
 

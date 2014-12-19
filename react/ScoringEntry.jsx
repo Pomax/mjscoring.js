@@ -5,14 +5,14 @@ var ScoringEntry = React.createClass({
     return (
       <div className="entry">
         <div onClick={this.toggleLog}>
-          <div className="info" data-winner={data.winner} data-amount={data.amount}> points</div>
+          <div className="info" data-winner={data.winner} data-amount={data.values.balance}> points</div>
         </div>
         <div className="hidden log" onClick={this.hideLog} ref="log">
-          <div className="tiles">{data.tiles}</div>
-
-        {data.log.map(function(line,idx) {
-          return <div key={idx} className="line">{line}</div>;
-        })}
+          <div>{data.values.tilepoints} tilepoints, {data.values.amount} points total</div>
+          <div className="tiles">hand: {data.tiles}</div>
+          {data.log.map(function(line,idx) {
+            return <div key={idx} className="line">{line}</div>;
+          })}
         </div>
       </div>
     );

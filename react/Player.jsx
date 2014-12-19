@@ -31,7 +31,7 @@ var Player = React.createClass({
   render: function() {
     var windclass = "wind" + this.state.wind;
     return (
-      <div className="player">
+      <div className="player pwidth">
         <div ref="playerinfo">
           <span className={windclass}>{this.state.wind}</span>
           <input type="text" className="name" value={this.state.name} placeholder="player name here" />
