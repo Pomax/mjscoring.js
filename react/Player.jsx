@@ -34,7 +34,7 @@ var Player = React.createClass({
       <div className="player pwidth">
         <div ref="playerinfo">
           <span className={windclass}>{this.state.wind}</span>
-          <input type="text" className="name" value={this.state.name} placeholder="player name here" />
+          <input type="text" className="name" value={this.state.name} placeholder="player name here" onChange={this.setName}/>
           <span className="scoring">score: {this.state.score}/{this.state.wins}</span>
         </div>
 
@@ -55,6 +55,10 @@ var Player = React.createClass({
   },
 
   // ==========================================
+
+  setName: function(event) {
+    this.setState({ name: event.target.value });
+  },
 
   press: function(event) {
     var button = event.target;

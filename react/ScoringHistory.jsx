@@ -9,16 +9,26 @@ var ScoringHistory = React.createClass({
   render: function() {
     return (
       <div ref="history" className="scoring-history pwidth">
-      {this.state.hands.map(function(handData) {
-        return <ScoringEntry data={handData} />;
+      {this.state.hands.map(function(handData, idx) {
+        var ref = "entry" + idx;
+        return <ScoringEntry data={handData} ref={ref}/>;
       })}
       </div>
     );
   },
 
   addHand: function(hand) {
+    this.hideLogs();
     this.setState({
       hands: this.state.hands.concat([hand])
+    });
+  },
+
+  hideLogs: function() {
+    var self = this;
+    this.state.hands.forEach(function(handData, idx) {
+      var ref = "entry" + idx;
+      self.refs[ref].hideLog();
     });
   }
 
