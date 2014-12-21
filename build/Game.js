@@ -10,6 +10,7 @@ var Game = React.createClass({displayName: "Game",
   },
 
   componentDidMount: function() {
+    stateRecorder.register(this);
     var self = this;
     this.rules = this.refs.rules;
     this.players = [ this.refs.p1, this.refs.p2, this.refs.p3, this.refs.p4 ];
@@ -22,8 +23,6 @@ var Game = React.createClass({displayName: "Game",
     this.rules.setPlayers(this.players);
     this.scores = this.refs.scoring;
     this.__endGame();
-    this.start();
-    stateRecorder.register(this);
   },
 
   loadState: function(state) {
@@ -76,6 +75,7 @@ var Game = React.createClass({displayName: "Game",
       windoftheround: 0
     });
     this.__start();
+    document.dispatchEvent(new CustomEvent("game-started", { detail: {} }));
   },
 
   // This is questionable, but I don't know how React wants me to do this
@@ -90,7 +90,6 @@ var Game = React.createClass({displayName: "Game",
 
     // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
     setTimeout(function() { stateRecorder.replaceState(); }, 500);
-
   },
 
   // This is questionable, but I don't know how React wants me to do this

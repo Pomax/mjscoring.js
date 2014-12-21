@@ -2,6 +2,13 @@ section {
   width: 1024px;
   margin: auto;
   text-align: justify;
+  height: 30em;
+  overflow: hidden;
+  transition: height 0.3s linear;
+}
+
+section.slideout {
+  height: 0;
 }
 
 /*
