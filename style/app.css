@@ -150,7 +150,7 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 }
 
 .set input[type=text] {
-  width: 5em;
+  width: 4em;
   margin: 0;
   padding: 0;
   border: 1px solid grey;
@@ -279,7 +279,7 @@ select.limits {
   height: 2em;
   margin: 0;
   background: #F9F9F9;
-  width: 6em;
+  width: 7em;
   vertical-align: middle;
 }
 

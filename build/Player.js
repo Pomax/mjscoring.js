@@ -30,9 +30,9 @@ var Player = React.createClass({displayName: "Player",
   },
 
   loadState: function(state) {
-    if(!state) {
-      console.error("Player did not receive a state to load");
-    }
+    console.log(state);
+    this.currentWind = state.wind;
+    this.currentScore = state.score;
     this.setState(state);
   },
 

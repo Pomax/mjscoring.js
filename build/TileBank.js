@@ -13,8 +13,8 @@ var TileBank = React.createClass({displayName: "TileBank",
   },
 
   render: function() {
-    var tiles = this.state.tiles.map(function(tile) {
-      return React.createElement(Tile, {suit: tile.suit, face: tile.face})
+    var tiles = this.state.tiles.map(function(tile, idx) {
+      return React.createElement(Tile, {suit: tile.suit, face: tile.face, key: idx})
     })
     return (
       React.createElement("div", {className: "tilebank"}, 

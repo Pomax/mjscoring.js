@@ -175,7 +175,7 @@ var ChineseClassical = React.createClass({
   },
 
   scoreSet: function(score, set, ownwind, windoftheround) { with(set) {
-    var self = this,  points, reason;
+    var points, reason;
 
     // no points for a chow, or pair of numbers!
     if(numeric && !pung && !kong) return;
@@ -184,12 +184,12 @@ var ChineseClassical = React.createClass({
     // 2 points for concealed pair of wind of the round
     // 2 points for concealed pair of dragons
     if(same && pair && concealed) {
-      if(tile === self.winds[ownwind])
-        self.scorePoints(score, 2, "a concealed pair of own winds");
-      else if(tile === self.winds[windoftheround])
-        self.scorePoints(score, 2, "a concealed pair of wind of the round");
-      else if(self.dragons.indexOf(tile) > -1)
-        self.scorePoints(score, 2, "a concealed pair of dragons");
+      if(tile === this.winds[ownwind])
+        this.scorePoints(score, 2, "a concealed pair of own winds");
+      else if(tile === this.winds[windoftheround])
+        this.scorePoints(score, 2, "a concealed pair of wind of the round");
+      else if(this.dragons.indexOf(tile) > -1)
+        this.scorePoints(score, 2, "a concealed pair of dragons");
       return;
     }
 
@@ -201,24 +201,24 @@ var ChineseClassical = React.createClass({
     if (numeric) {
       points = (pung?1:4) * (!terminal? (!concealed? 2:4) : (!concealed? 4:8));
       reason = "a " + (concealed?'concealed ':'') + (pung?'pung':'kong') + " of " + (terminal?'terminals':'simples');
-      self.scorePoints(score, points, reason);
+      this.scorePoints(score, points, reason);
       return;
     }
 
     // 4/8, 16/32 points for pung/kong winds/dragons
     points = (pung?1:4) * (!concealed?4:8);
     reason = "a " + (concealed?'concealed ':'') + (pung?'pung':'kong') + " of " + (dragon?'dragons':'winds');
-    self.scorePoints(score, points, reason);
+    this.scorePoints(score, points, reason);
 
     // 1 double for pung/kong of dragons
     // 1 double for pung/kong of own wind
     // 1 double for pung/kong of wind of the round
-    if(tile === self.winds[ownwind])
-      self.scoreDoubles(score, 1, "a " + (pung?'pung':'kong') + " of own winds");
-    else if(tile === self.winds[windoftheround])
-      self.scoreDoubles(score, 1, "a " + (pung?'pung':'kong') + " of the wind of the round");
-    else if(self.dragons.indexOf(tile) > -1)
-      self.scoreDoubles(score, 1, "a " + (pung?'pung':'kong') + " of dragons");
+    if(tile === this.winds[ownwind])
+      this.scoreDoubles(score, 1, "a " + (pung?'pung':'kong') + " of own winds");
+    else if(tile === this.winds[windoftheround])
+      this.scoreDoubles(score, 1, "a " + (pung?'pung':'kong') + " of the wind of the round");
+    else if(this.dragons.indexOf(tile) > -1)
+      this.scoreDoubles(score, 1, "a " + (pung?'pung':'kong') + " of dragons");
   }},
 
   scorePattern: function(score, sets, wind, windoftheround) {
@@ -226,10 +226,9 @@ var ChineseClassical = React.createClass({
     var properties = sets.map(function(s) { return s.properties; });
 
     // 1 doubles for three concealed pung/kong
-    var concealed = 0;
-    properties.forEach(function(p) { with(p) { if(same && (pung||kong) && concealed) concealed++; }});
-    if(concealed>=3)
-      self.scoreDoubles(score, 1, "having three concealed triplets");
+    var concealedTriplets = 0;
+    properties.forEach(function(p) { with(p) { if(same && (pung||kong) && concealed) { concealedTriplets++; }}});
+    if(concealedTriplets >= 3) self.scoreDoubles(score, 1, "having three concealed triplets");
 
     // doubles from honour patterns:
     var wpung = 0, wpair = 0, dpung = 0, dpair = 0;
@@ -293,14 +292,17 @@ var ChineseClassical = React.createClass({
     if(properties.every(function(p) { return (p.pair || p.pung || p.kong) && (p.terminal || p.dragon || p.wind); }))
       self.scoreDoubles(score, 1, "a terminals and honours hand");
 
-    // 1 double for one suit and honours
-    var suit = properties[0].suit;
-    var honours = suit ? false : true;
+    // what about those suits and honours?
+    var suits = [];
+    var honours = false;
     properties.forEach(function(p) {
-      var s = p.suit;
-      if(!s) { honours = true; }
-      else if(s !== suit) { suit = false; }
+      var suit = p.suit;
+      if(suit) { if (suits.indexOf(suit)===-1) suits.push(suit); }
+      else honours = true;
     });
+    var suit = (suits.length===1);
+
+    // 1 double for one suit and honours
     if(suit!==false && honours)
       self.scoreDoubles(score, 1, "a one suit and honours hand");
 
@@ -361,7 +363,6 @@ var ChineseClassical = React.createClass({
       winvalue = 4 * winvalue;
       balance[winneridx] = winvalue;
       balance[ninetileidx] = -winvalue;
-      this.scorePoints(scores[ninetileidx], -winvalue, "fascilitating the win");
     }
 
     // no nine tile error. All players pay the winner.
@@ -370,16 +371,12 @@ var ChineseClassical = React.createClass({
       players.forEach(function(p,idx) {
         if(idx===winneridx) return;
         var diff = winvalue * (p.currentWind === 0 ? 2 : 1); // east pays double if they lose
-        p.receivePoints(-diff);
-        balance[idx] += -diff;
-
-        winner.receivePoints(diff);
+        balance[idx] -= diff;
         balance[winneridx] += diff;
       });
     }
 
     // then scores are settled amongst the losers
-
     var i,j,p1,p2,v1,v2;
     for(i=0; i<4; i++) {
       if(i===winneridx) continue;
@@ -389,12 +386,10 @@ var ChineseClassical = React.createClass({
         if(j===winneridx) continue;
         p2 = players[j];
         v2 = scores[j].value;
-        diff = v1 - v2;
+        diff = (v1 - v2) * (p1.currentWind===0 || p2.currentWind===0 ? 2 : 1);
         if(diff!==0) {
-          p1.receivePoints(diff);
           balance[i] += diff;
-          p2.receivePoints(-diff);
-          balance[j] += -diff;
+          balance[j] -= diff;
         }
       }
     }
@@ -402,6 +397,7 @@ var ChineseClassical = React.createClass({
     // and finally we chronicle these scores in the scoring area
     players.forEach(function(p, idx) {
       scores[idx].balance = balance[idx];
+      p.receivePoints(balance[idx]);
       scoringarea.recordHand(idx, scores[idx].getHand());
     });
   },
