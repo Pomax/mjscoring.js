@@ -186,9 +186,9 @@ var ChineseClassical = React.createClass({
     if(same && pair && concealed) {
       if(tile === this.winds[ownwind])
         this.scorePoints(score, 2, "a concealed pair of own winds");
-      else if(tile === this.winds[windoftheround])
+      if(tile === this.winds[windoftheround])
         this.scorePoints(score, 2, "a concealed pair of wind of the round");
-      else if(this.dragons.indexOf(tile) > -1)
+      if(this.dragons.indexOf(tile) > -1)
         this.scorePoints(score, 2, "a concealed pair of dragons");
       return;
     }
