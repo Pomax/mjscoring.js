@@ -201,15 +201,15 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 
 .bonus button.pressed { color: transparent; border:1px solid black; }
 
-.bonus button.f1.pressed { background: url(/style/tiles/f1.jpg); background-size: 100% 100%; }
-.bonus button.f2.pressed { background: url(/style/tiles/f2.jpg); background-size: 100% 100%; }
-.bonus button.f3.pressed { background: url(/style/tiles/f3.jpg); background-size: 100% 100%; }
-.bonus button.f4.pressed { background: url(/style/tiles/f4.jpg); background-size: 100% 100%; }
+.bonus button.f1.pressed { background: url(style/tiles/f1.jpg); background-size: 100% 100%; }
+.bonus button.f2.pressed { background: url(style/tiles/f2.jpg); background-size: 100% 100%; }
+.bonus button.f3.pressed { background: url(style/tiles/f3.jpg); background-size: 100% 100%; }
+.bonus button.f4.pressed { background: url(style/tiles/f4.jpg); background-size: 100% 100%; }
 
-.bonus button.s1.pressed { background: url(/style/tiles/s1.jpg); background-size: 100% 100%; }
-.bonus button.s2.pressed { background: url(/style/tiles/s2.jpg); background-size: 100% 100%; }
-.bonus button.s3.pressed { background: url(/style/tiles/s3.jpg); background-size: 100% 100%; }
-.bonus button.s4.pressed { background: url(/style/tiles/s4.jpg); background-size: 100% 100%; }
+.bonus button.s1.pressed { background: url(style/tiles/s1.jpg); background-size: 100% 100%; }
+.bonus button.s2.pressed { background: url(style/tiles/s2.jpg); background-size: 100% 100%; }
+.bonus button.s3.pressed { background: url(style/tiles/s3.jpg); background-size: 100% 100%; }
+.bonus button.s4.pressed { background: url(style/tiles/s4.jpg); background-size: 100% 100%; }
 
 /*
   Limit hand picker
