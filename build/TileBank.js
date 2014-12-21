@@ -14,8 +14,9 @@ var TileBank = React.createClass({displayName: "TileBank",
 
   render: function() {
     var tiles = this.state.tiles.map(function(tile, idx) {
-      return React.createElement(Tile, {suit: tile.suit, face: tile.face, key: idx})
-    })
+      var key = tile.suit + tile.face + idx;
+      return React.createElement(Tile, {suit: tile.suit, face: tile.face, key: key})
+    });
     return (
       React.createElement("div", {className: "tilebank"}, 
         tiles
@@ -29,12 +30,9 @@ var TileBank = React.createClass({displayName: "TileBank",
 
   setTiles: function(tiles) {
     if(!tiles) return this.reset();
-
     var banktiles = [];
-
     if (!tiles.forEach) { tiles = [tiles]; }
     tiles.forEach(function(tiles) {
-
       // suited tiles?
       if(tiles.indexOf(".")>-1) {
         tiles = tiles.split(".");
@@ -44,7 +42,6 @@ var TileBank = React.createClass({displayName: "TileBank",
           banktiles.push({ suit: suit, face: face });
         });
       }
-
       // suitless tiles
       else {
         tiles = tiles.split('');
@@ -52,7 +49,6 @@ var TileBank = React.createClass({displayName: "TileBank",
           banktiles.push({ suit: "", face: face });
         });
       }
-
     });
     this.setState({ tiles: banktiles });
   }

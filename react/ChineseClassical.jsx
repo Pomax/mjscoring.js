@@ -227,7 +227,11 @@ var ChineseClassical = React.createClass({
 
     // 1 doubles for three concealed pung/kong
     var concealedTriplets = 0;
-    properties.forEach(function(p) { with(p) { if(same && (pung||kong) && concealed) { concealedTriplets++; }}});
+    properties.forEach(function(p) { with(p) { if(same) {
+      if (concealed && (pung||kong)) { concealedTriplets++; }
+      // a kong on the table that isn't concealed was a concealed pung, and counts.
+      else if(kong) { concealedTriplets++; }
+    }}});
     if(concealedTriplets >= 3) self.scoreDoubles(score, 1, "having three concealed triplets");
 
     // doubles from honour patterns:

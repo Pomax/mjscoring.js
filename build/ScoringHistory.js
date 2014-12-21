@@ -20,8 +20,8 @@ var ScoringHistory = React.createClass({displayName: "ScoringHistory",
       React.createElement("div", {ref: "history", className: "scoring-history pwidth"}, 
       this.state.hands.map(function(handData, idx) {
         var ref = "entry" + idx;
-        return React.createElement(ScoringEntry, {data: handData, ref: ref});
-      })
+        return React.createElement(ScoringEntry, {data: handData, ref: ref, key: idx});
+      }).reverse()
       )
     );
   },

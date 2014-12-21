@@ -48,7 +48,8 @@ var Set = React.createClass({
       if (event.target === button) return;
       button.reset();
     });
-    this.updateTileBank(this.getTilesString());
+    var newtiles = this.getTilesString();
+    this.updateTileBank(newtiles);
   },
 
   updateSet: function(event) {
@@ -113,12 +114,12 @@ var Set = React.createClass({
   },
 
   getTilesString: function() {
-    var self = this;
     var suit = this.getSuit();
     var tiles = this.getTiles();
     var joined = tiles.join('');
+    var concealed = this.getConcealed();
     var wrap = function(input) {
-      return self.state.concealed ? "("+input+")" : input;
+      return concealed ? "(" + input + ")" : input;
     };
     if(tiles.length>0) {
       if (typeof tiles[0] === "number") {
