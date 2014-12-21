@@ -23,10 +23,7 @@ StateRecorder.prototype = {
     var self = this;
     var fullState = {};
     Object.keys(this.bindings).forEach(function(stateId) {
-      var object = self.bindings[stateId];
-      if(object && object.loadState) {
-        fullState[stateId] = object.state;
-      }
+      fullState[stateId] = self.bindings[stateId].state;
     });
     return fullState;
   },
