@@ -2,8 +2,7 @@ var ScoringEntry = React.createClass({
 
   render: function() {
     var data = this.props.data;
-    var handtiles = '';
-    if(data.tiles) handtiles = <div className="tiles">hand: {data.tiles}</div>;
+    var tilebank = data.tiles ? <TileBank ref="tilebank" handtiles={data.tiles} /> : '';
     return (
       <div className="entry">
         <div onClick={this.toggleLog}>
@@ -11,7 +10,7 @@ var ScoringEntry = React.createClass({
         </div>
         <div className="hidden log" onClick={this.hideLog} ref="log">
           <div>{data.values.tilepoints} tilepoints, {data.values.amount} points total</div>
-          {handtiles}
+          {tilebank}
           {data.log.map(function(line,idx) {
             return <div key={idx} className="line">{line}</div>;
           })}

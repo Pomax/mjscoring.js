@@ -23,12 +23,22 @@ var Game = React.createClass({
     this.scores = this.refs.scoring;
     this.__endGame();
     this.start();
+    stateRecorder.register(this);
+  },
+
+  loadState: function(state) {
+    if(!state) {
+      console.error("Game did not receive a state to load");
+    }
+    this.setState(state);
   },
 
   render: function() {
     var wotrclass = "wind" + this.state.windoftheround;
+
     return (
       <div className="game">
+
         <div ref="info">
           Hand: {this.state.hand} ({this.state.draws } draws) Wind of the round: <span className={wotrclass}>{this.state.windoftheround}</span>
         </div>
@@ -41,10 +51,10 @@ var Game = React.createClass({
         </div>
 
         <div ref="buttons" className="play-buttons">
-          <button ref="start" onClick={this.start}>New Game</button>
-          <button ref="reset" onClick={this.reset}>Reset this hand</button>
-          <button ref="draw" onClick={this.draw}>This hand is a draw</button>
-          <button className="score" ref="score" onClick={this.score}>Score</button>
+          <Button type="signal" ref="start" name="start" onClick={this.start} label="New Game" />
+          <Button type="signal" ref="reset" name="reset" onClick={this.reset} label="Reset this hand" />
+          <Button type="signal" ref="draw"  name="draw"  onClick={this.draw}  label="This hand is a draw" />
+          <Button type="signal" ref="score" name="score" onClick={this.score} label="Score" className="score"/>
         </div>
 
         <div>Scoring extras:</div>
@@ -77,6 +87,10 @@ var Game = React.createClass({
     this.refs.draw.getDOMNode().removeAttribute("disabled");
     this.refs.score.getDOMNode().removeAttribute("disabled");
     this.reset();
+
+    // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
+    setTimeout(function() { stateRecorder.replaceState(); }, 500);
+
   },
 
   // This is questionable, but I don't know how React wants me to do this
@@ -123,6 +137,9 @@ var Game = React.createClass({
     if(!winner) {
       return alert("No one has won yet\n\n(Illegal win, Draw, or accidentally pressed Score?)");
     }
+
+    stateRecorder.replaceState();
+
     this.rules.award(this.players, scores, this.scores);
     this.nextHand(winner);
   },
@@ -153,6 +170,10 @@ var Game = React.createClass({
       this.setState({ hand: this.state.hand + 1 });
       this.reset();
     }
+
+    // this is now a "new page" in the history.
+    // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
+    setTimeout(function() { stateRecorder.saveState(); }, 500);
   }
 
 });

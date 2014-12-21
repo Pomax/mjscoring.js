@@ -6,6 +6,15 @@ var ScoringHistory = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    stateRecorder.register(this);
+  },
+
+  loadState: function(state) {
+    if(!state) return;
+    this.setState(state);
+  },
+
   render: function() {
     return (
       <div ref="history" className="scoring-history pwidth">

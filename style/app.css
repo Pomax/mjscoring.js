@@ -9,6 +9,7 @@
 * {
   font-family: Verdana, "MS Mincho";
   font-size: 10pt;
+  outline: 0;
 }
 
 body > h1 {
@@ -136,7 +137,7 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 }
 
 .set input[type=text] {
-  width: calc(100% - 9em);
+  width: calc(100% - 15em);
   margin: 0;
   padding: 0;
   border: 1px solid grey;
@@ -144,31 +145,25 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
   vertical-align: bottom;
 }
 
-.set .suit {
+.set button {
   vertical-align: middle;
   width:  2em;
   height: 2em;
 }
 
-.set button.suit.characters.pressed {
+.set button.characters.pressed {
   background: rgba(205,0,0,0.5);
-  color: #901616;
+  color: #6F0000;
 }
 
-.set button.suit.bamboo.pressed {
+.set button.bamboo.pressed {
   background: rgba(0,100,0,0.4);
-  color: #627146;
+  color: #283E00;
 }
 
-.set button.suit.dots.pressed {
+.set button.dots.pressed {
   background: rgba(0,60,175,0.4);
-  color: #5C6196;
-}
-
-.set input[type=checkbox] {
-  vertical-align: middle;
-  width: 1em;
-  height: 1em;
+  color: #000EA7;
 }
 
 /*
@@ -187,20 +182,21 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
   color: blue;
 }
 
-.bonus .flowers button.pressed {
-  background: rgba(110,150,255,0.5);
-  color: white;
-}
-
 .bonus .seasons button {
   color: red;
 }
 
-.bonus .seasons button.pressed {
-  background: rgba(255,50,50,0.5);
-  color: white;
-}
+.bonus button.pressed { color: transparent; border:1px solid black; }
 
+.bonus button.f1.pressed { background: url(/style/tiles/f1.jpg); background-size: 100% 100%; }
+.bonus button.f2.pressed { background: url(/style/tiles/f2.jpg); background-size: 100% 100%; }
+.bonus button.f3.pressed { background: url(/style/tiles/f3.jpg); background-size: 100% 100%; }
+.bonus button.f4.pressed { background: url(/style/tiles/f4.jpg); background-size: 100% 100%; }
+
+.bonus button.s1.pressed { background: url(/style/tiles/s1.jpg); background-size: 100% 100%; }
+.bonus button.s2.pressed { background: url(/style/tiles/s2.jpg); background-size: 100% 100%; }
+.bonus button.s3.pressed { background: url(/style/tiles/s3.jpg); background-size: 100% 100%; }
+.bonus button.s4.pressed { background: url(/style/tiles/s4.jpg); background-size: 100% 100%; }
 
 /*
   Limit hand picker
@@ -215,6 +211,7 @@ select.limits {
 /*
   Scoring
 */
+
 .scoring-history {
   display: inline-block;
   padding: 4px;
@@ -249,4 +246,42 @@ select.limits {
   color: #222;
   background: #DDD;
   border-top: 1px solid #666;
+}
+
+.scoring-history .entry .log .tilebank {
+  width: 100%;
+  background: inherit;
+}
+
+.scoring-history .entry .log .tilebank .tile {
+  width: 6%;
+}
+
+/*
+  Tile bank styling
+*/
+
+.tilebank {
+  display: inline-block;
+  height: 2em;
+  margin: 0;
+  background: #F9F9F9;
+  width: 6em;
+  vertical-align: middle;
+}
+
+.tilebank .tile {
+  max-height: 100%;
+}
+
+/*
+  Tile styling
+*/
+
+.tile {
+  border: 1px solid darkgrey;
+}
+
+.tile + .tile {
+  margin-left: 1px;
 }

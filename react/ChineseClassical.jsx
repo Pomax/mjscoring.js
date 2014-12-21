@@ -142,21 +142,26 @@ var ChineseClassical = React.createClass({
   },
 
   scoreBonus: function(score, bonus, ownwind, windoftheround) {
+    var self = this;
     var flowers = bonus.getFlowers();
     var seasons = bonus.getSeasons();
     // 4 points for each bonus tile:
-    var count = flowers.concat(seasons)
-                       .map(function(v) { return v ? 1 : 0; })
-                       .reduce(function(a,b) { return a+b; });
-    score.tilepoints += 4 * count;
+    flowers.forEach(function(f, idx) { if(f) { self.scorePoints(score, 4, "flower "+(idx+1)); } });
+    seasons.forEach(function(s, idx) { if(s) { self.scorePoints(score, 4, "season "+(idx+1)); } });
     // 1 double if own flower and own season:
-    if (flowers[ownwind] && seasons[ownwind]) { score.doubles++; }
+    if (flowers[ownwind] && seasons[ownwind]) {
+      this.scoreDoubles(score, 1, " having own flower and season");
+    }
     // 1 double for all flowers:
     var all_flowers = flowers.reduce(function(a,b) { return a&&b; });
-    if (all_flowers) { score.doubles++; }
+    if (all_flowers) {
+      this.scoreDoubles(score, 1, "having all flowers");
+    }
     // 1 double for all seasons:
     var all_seasons = seasons.reduce(function(a,b) { return a&&b; });
-    if (all_seasons) { score.doubles++; }
+    if (all_seasons) {
+      this.scoreDoubles(score, 1, "having all seasons");
+    }
     // all bonus tiles is 3 doubles, but is covered by the previous computations
   },
 

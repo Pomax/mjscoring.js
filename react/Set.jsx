@@ -1,52 +1,59 @@
 var Set = React.createClass({
 
   getInitialState: function() {
-    return {
-      set: '',
-      concealed: false
-    };
+    return { set: '' };
   },
 
   componentDidMount: function() {
-    this.characters = this.refs.characters.getDOMNode();
-    this.bamboo = this.refs.bamboo.getDOMNode();
-    this.dots = this.refs.dots.getDOMNode();
+    stateRecorder.register(this);
+  },
+
+  loadState: function(state) {
+    this.setState(state);
+    this.updateTileBank(this.getTilesString());
   },
 
   render: function() {
     return (
       <div className="set">
         <input ref="tiles" type="text" value={this.state.set} onChange={this.updateSet} />
-        <button className="characters suit" ref="characters" onClick={this.press}>満</button>
-        <button className="bamboo suit" ref="bamboo" onClick={this.press}>竹</button>
-        <button className="dots suit" ref="dots" onClick={this.press}>◎</button>
-        <input ref="concealed" type="checkbox" checked={this.state.concealed} onChange={this.toggleConcealed} />
+        <Button ref="characters" name="characters" onClick={this.press} label="満" />
+        <Button ref="bamboo"     name="bamboo"     onClick={this.press} label="竹" />
+        <Button ref="dots"       name="dots"       onClick={this.press} label="◎" />
+        <TileBank ref="tilebank" />
+        <Button ref="concealed"  name="concealed"  label="..." />
       </div>
     );
   },
 
   // ==========================================
 
+  updateTileBank: function(tiles) {
+    this.refs.tilebank.setTiles(tiles);
+  },
+
   reset: function() {
-    this.setState({ set: '', concealed: false });
-    this.characters.classList.remove("pressed");
-    this.bamboo.classList.remove("pressed");
-    this.dots.classList.remove("pressed");
+    this.setState({ set: '' });
+    this.refs.characters.reset();
+    this.refs.bamboo.reset();
+    this.refs.dots.reset();
+    this.refs.concealed.reset();
+    this.refs.tilebank.reset();
   },
 
   press: function(event) {
-    var button = event.target;
-    button.classList.toggle("pressed");
+    var self = this;
+    ["characters", "bamboo", "dots"].forEach(function(ref) {
+      var button = self.refs[ref];
+      if (event.target === button) return;
+      button.reset();
+    });
+    this.updateTileBank(this.getTilesString());
   },
 
   updateSet: function(event) {
     this.setState({ set: event.target.value });
-  },
-
-  toggleConcealed: function() {
-    this.setState({
-      concealed: !this.state.concealed
-    });
+    this.updateTileBank(this.getTilesString());
   },
 
   empty: function() {
@@ -59,13 +66,13 @@ var Set = React.createClass({
     for(var i=0; i<slen; i++) {
       var suit = suits[i];
       var btn = this[suit];
-      if(this[suit].classList.contains("pressed")) return suit;
+      if(this.refs[suit].isPressed()) return suit;
     }
     return false;
   },
 
   getTiles: function() {
-    var v = this.state.set;
+    var v = this.refs.tiles.getDOMNode().value;
     v = v.split('').map(function(v) {
       if(parseInt(v,10) == v) {
         return parseInt(v,10);
@@ -76,7 +83,25 @@ var Set = React.createClass({
   },
 
   getConcealed: function() {
-    return this.state.concealed;
+    return this.refs.concealed.isPressed();
+  },
+
+  getTilesString: function() {
+    var self = this;
+    var suit = this.getSuit();
+    var tiles = this.getTiles();
+    var joined = tiles.join('');
+    var wrap = function(input) {
+      return self.state.concealed ? "("+input+")" : input;
+    };
+    if(tiles.length>0) {
+      if (typeof tiles[0] === "number") {
+        if(!suit) return false;
+        return wrap(suit.substring(0,1) + "." + joined);
+      }
+      return wrap(joined);
+    }
+    return false;
   }
 
 });

@@ -6,18 +6,23 @@
     <title>Mahjong Scoring</title>
     <script src="bower_components/react/react.js"></script>
     <script src="bower_components/react/JSXTransformer.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/app.css">
   </head>
 
   <body>
-
-
     <div id="app">
       <h1>A scoring app for playing majong using "Chinese classical" rules</h1>
       <p>React is loading all the necessary code<p>
       <p>Unless, of course, you're blocking JavaScript. Then the app will never load</p>
     </div>
 
+    <script src="StateRecorder.js"></script>
+    <script> var stateRecorder = new StateRecorder(); </script>
+
+    <script src="react/basic/Button.jsx" type="text/jsx"></script>
+
+    <script src="react/Tile.jsx" type="text/jsx"></script>
+    <script src="react/TileBank.jsx" type="text/jsx"></script>
     <script src="react/WinModifiers.jsx" type="text/jsx"></script>
     <script src="react/ChineseClassical.jsx" type="text/jsx"></script>
     <script src="react/Rules.jsx" type="text/jsx"></script>

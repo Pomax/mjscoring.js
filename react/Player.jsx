@@ -26,6 +26,14 @@ var Player = React.createClass({
       this.refs.s4,
       this.refs.s5
     ];
+    stateRecorder.register(this);
+  },
+
+  loadState: function(state) {
+    if(!state) {
+      console.error("Player did not receive a state to load");
+    }
+    this.setState(state);
   },
 
   render: function() {
@@ -46,8 +54,8 @@ var Player = React.createClass({
         <Set ref="s4" />
         <Set ref="s5" />
 
-        <button ref="ninetile" onClick={this.press}>nine tile error!</button>
-        <button ref="illegal" onClick={this.confirmIllegalOut}>illegal win declaration!</button>
+        <Button ref="ninetile" label="nine tile error!" />
+        <Button ref="illegal"  onClick={this.confirmIllegalOut} label="illegal win declaration!" type="signal"/>
 
         <LimitHands ref="limits" />
       </div>
@@ -58,11 +66,6 @@ var Player = React.createClass({
 
   setName: function(event) {
     this.setState({ name: event.target.value });
-  },
-
-  press: function(event) {
-    var button = event.target;
-    button.classList.toggle("pressed");
   },
 
   confirmIllegalOut: function(event) {
@@ -84,12 +87,10 @@ var Player = React.createClass({
   },
 
   reset: function() {
-    this.sets.forEach(function(set) {
-      set.reset();
-    });
+    this.sets.forEach(function(set) { set.reset(); });
     this.refs.bonus.reset();
     this.refs.limits.reset();
-    this.refs.ninetile.getDOMNode().classList.remove("pressed");
+    this.refs.ninetile.reset();
   },
 
   useRules: function(rules) {
@@ -123,7 +124,7 @@ var Player = React.createClass({
   },
 
   getNineTileError: function() {
-    return this.refs.ninetile.getDOMNode().classList.contains("pressed");
+    return this.refs.ninetile.isPressed();
   },
 
   receivePoints: function(amount) {
