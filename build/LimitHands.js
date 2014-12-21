@@ -47,7 +47,6 @@ var LimitHands = React.createClass({displayName: "LimitHands",
   getLimit: function() {
     var opt = this.select.selectedIndex;
     if(opt===0) return false;
-    this.setState({ limitidx: opt });
     return this.select.options[opt].textContent;
   }
 
