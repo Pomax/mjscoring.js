@@ -265,7 +265,7 @@ var ChineseClassical = React.createClass({
 
     // and they need the right number of tiles...
     var total = sets.map(function(s) { return s.properties.tiles.length; }).reduce(function(a,b) { return a+b; });
-    if(total !== this.wincount) return;
+    if(total < this.wincount) return;
 
     // Alright, winner! 10 points straight away just for winning.
     score.winner = true;

@@ -1,3 +1,9 @@
+section {
+  width: 1024px;
+  margin: auto;
+  text-align: justify;
+}
+
 /*
   Universal styling
 */

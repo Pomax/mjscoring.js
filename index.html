@@ -13,14 +13,49 @@
       <p>Unless, of course, you're blocking JavaScript. Then the app will never load</p>
     </div>
 
-    <h1>How to use this app</h1>
-    <p>This app has been designed for use while playing, requiring one person to keep
-      score as players reveal tiles and declare wins.</p>
+    <section>
+      <h1>How to use this app</h1>
 
+      <p>This app has been designed for use while playing, requiring one person to keep
+        score as players reveal tiles and declare wins. Each player has five sets that
+        can be filled out while playing, using the numbers 1 through 9 for numeric tiles
+        and the letters [e], [s], [w], [n], [c], [f], and [p] for the four winds and the
+        three dragons. For numeric tiles, the suits are indicated with the suit buttons
+        next to the input field. To mark a set as concealed, use the "..." button.</p>
+
+      <p>To score a hand after someone has declared a win, simply make sure all tiles
+        have been chronicled, and that the winner's special win conditions have been
+        marked. Then hit the "score" button, and the app should score everyone, process
+        the balances, and move the app over to the next turn, with the winds rotated
+        appropriately.</p>
+
+      <p>If a player declares a win without having a winning hand, the "illegal win
+        declaration!" button can be used. This processes the associated penalty and
+        resets the hand. Should a player commit a "nine tile error", click its button
+        for the offending player, then score hands regularly. The scoring algorithm
+        will take the nine tile error into account.</p>
+
+      <p>Limit hands are not automatically detected - you will have to pick the
+        appropriate limit hand from the list of limit hands for the winning player.</p>
+
+      <p>Scores are listed below the main UI area, with the scoring arranged in the same
+        order as the players are. By default only the total number of points won/list per
+        hand are shown, but these values can be clicked to reveal detailed win/loss
+        information such as hand tiles, points for patterns, doubles, etc.</p>
+
+      <p>The app currently only supports Chinese Classical rules, however the code has
+        been structured in such a way as to allow additional rulesets to be encoded
+        without having to fiddle with any other aspects of the app. If you are interested
+        in helping write additional rulesets, head on over to the <a href="http://github.com/Pomax/mjscoring.js">github
+        project page</a> and file an issue for the ruleset you wish to help with,
+        or hit me up on <a href="http://twitter.com/TheRealPomax">twitter</a>. I'd love to hear from you!</p>
+
+    </section>
+
+    <link rel="stylesheet" href="style/app.css">
     <script src="bower_components/react/react.min.js"></script>
     <script src="StateRecorder.js"></script>
     <script src="dist/packed.js"></script>
-    <link rel="stylesheet" href="style/app.css">
   </body>
 
 </html>
