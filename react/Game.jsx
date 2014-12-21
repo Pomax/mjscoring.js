@@ -82,12 +82,13 @@ var Game = React.createClass({
   // without writing a component that is IDENTICAL to <button> except with
   // functions for enabling/disabling.
   __start: function() {
-    this.refs.start.getDOMNode().setAttribute("disabled","disabled");
-    this.refs.reset.getDOMNode().removeAttribute("disabled");
-    this.refs.draw.getDOMNode().removeAttribute("disabled");
-    this.refs.score.getDOMNode().removeAttribute("disabled");
+    this.refs.start.setDisabled(true);
+    this.refs.reset.setDisabled(false);
+    this.refs.draw.setDisabled(false);
+    this.refs.score.setDisabled(false);
+    this.refs.extras.setDisabled(false);
+    this.players.forEach(function(p) { p.setDisabled(false); });
     this.reset();
-
     // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
     setTimeout(function() { stateRecorder.replaceState(); }, 500);
   },
@@ -96,10 +97,12 @@ var Game = React.createClass({
   // without writing a component that is IDENTICAL to <button> except with
   // functions for enabling/disabling.
   __endGame: function() {
-    this.refs.start.getDOMNode().removeAttribute("disabled");
-    this.refs.reset.getDOMNode().setAttribute("disabled","disabled");
-    this.refs.draw.getDOMNode().setAttribute("disabled","disabled");
-    this.refs.score.getDOMNode().setAttribute("disabled","disabled");
+    this.refs.start.setDisabled(false);
+    this.refs.reset.setDisabled(true);
+    this.refs.draw.setDisabled(true);
+    this.refs.score.setDisabled(true);
+    this.refs.extras.setDisabled(true);
+    this.players.forEach(function(p) { p.setDisabled(true); });
   },
 
   reset: function() {

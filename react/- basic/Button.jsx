@@ -5,7 +5,13 @@
  */
 var Button = React.createClass({
   pressed: false,
-  getInitialState: function() { return { pressed: this.pressed }; },
+  disabled: false,
+  getInitialState: function() {
+    return {
+      pressed: this.pressed,
+      disabled: this.disabled
+    };
+  },
   componentDidMount: function() {
     this.pressed = !!this.props.pressed;
     this.setState({ pressed: this.pressed });
@@ -20,7 +26,7 @@ var Button = React.createClass({
       this.state.pressed ? "pressed" : '',
       this.props.name ? this.props.name : ''
     ].filter(function(v) { return !!v; }).join(" ");
-    return <button className={pclass} onClick={this.press}>{this.props.label}</button>;
+    return <button disabled={this.state.disabled} className={pclass} onClick={this.press}>{this.props.label}</button>;
   },
   reset: function() {
     this.pressed = false;
@@ -33,5 +39,14 @@ var Button = React.createClass({
     }
     if(this.props.onClick) { event.target = this; this.props.onClick(event); }
   },
-  isPressed: function() { return this.pressed; }
+  isPressed: function() {
+    return this.pressed;
+  },
+  isDisabled: function() {
+    return this.disabled;
+  },
+  setDisabled: function(b) {
+    this.disabled = b;
+    this.setState({ disabled: this.disabled });
+  }
 });

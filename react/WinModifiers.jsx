@@ -36,7 +36,7 @@ var WinModifiers = React.createClass({
     var self = this;
     this.buttons.forEach(function(ref) {
       self.refs[ref].reset();
-    })
+    });
   },
 
   getExtras: function() {
@@ -47,5 +47,11 @@ var WinModifiers = React.createClass({
     });
     return extras;
   },
+
+  setDisabled: function(b) {
+    this.buttons.forEach(function(ref) {
+      this.refs[ref].setDisabled(b);
+    }.bind(this));
+  }
 
 });

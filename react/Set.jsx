@@ -16,7 +16,7 @@ var Set = React.createClass({
   render: function() {
     return (
       <div className="set">
-        <input ref="tiles" type="text" value={this.state.set} onChange={this.updateSet} />
+        <input  ref="tiles" type="text" value={this.state.set} onChange={this.updateSet} />
         <Button ref="characters" name="characters" onClick={this.press} label="満" />
         <Button ref="bamboo"     name="bamboo"     onClick={this.press} label="竹" />
         <Button ref="dots"       name="dots"       onClick={this.press} label="◎" />
@@ -52,8 +52,34 @@ var Set = React.createClass({
   },
 
   updateSet: function(event) {
-    this.setState({ set: event.target.value });
-    this.updateTileBank(this.getTilesString());
+    var string = event.target.value;
+    if(string) {
+      if(string.match(/\d/)) {
+        if(string.indexOf("c")>-1) {
+          string = string.replace('c','');
+          event.target.value = string;
+          this.refs.characters.press({target:false});
+        }
+        else if(string.indexOf("b")>-1) {
+          string = string.replace('b','');
+          event.target.value = string;
+          this.refs.bamboo.press({target:false});
+        }
+        else if(string.indexOf("d")>-1) {
+          string = string.replace('d','');
+          event.target.value = string;
+          this.refs.dots.press({target:false});
+        }
+      }
+      if(string.match(/!/)) {
+        string = string.replace('!','');
+        event.target.value = string;
+        this.refs.concealed.press({target:false});
+      }
+      this.updateTileBank(this.getTilesString());
+    } else { this.updateTileBank(false); }
+
+    this.setState({ set: string });
   },
 
   empty: function() {
@@ -102,6 +128,13 @@ var Set = React.createClass({
       return wrap(joined);
     }
     return false;
+  },
+
+  setDisabled: function(b) {
+    this.refs.characters.setDisabled(b);
+    this.refs.bamboo.setDisabled(b);
+    this.refs.dots.setDisabled(b);
+    this.refs.concealed.setDisabled(b);
   }
 
 });

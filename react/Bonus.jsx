@@ -44,6 +44,10 @@ var Bonus = React.createClass({
   handleClaim: function(event) {
     if(event.detail.source === this) return;
     this.refs[event.detail.name].reset();
+  },
+
+  setDisabled: function(b) {
+    this.buttons.forEach(function(s) { s.setDisabled(b); });
   }
 
 });

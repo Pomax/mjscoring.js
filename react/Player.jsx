@@ -30,7 +30,6 @@ var Player = React.createClass({
   },
 
   loadState: function(state) {
-    console.log(state);
     this.currentWind = state.wind;
     this.currentScore = state.score;
     this.setState(state);
@@ -134,6 +133,13 @@ var Player = React.createClass({
 
   receiveWin: function() {
     this.setState({ wins: this.state.wins + 1 });
+  },
+
+  setDisabled: function(b) {
+    this.refs.bonus.setDisabled(b);
+    this.sets.forEach(function(s) { s.setDisabled(b); });
+    this.refs.ninetile.setDisabled(b);
+    this.refs.illegal.setDisabled(b);
   }
 
 });
