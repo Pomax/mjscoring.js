@@ -1,9 +1,9 @@
 /**
  * This button can either behave as a "regular" HTML button, or it can act
  * as an actually physical switch with an on/off state. If you press it,
- * the button stays pressed unless you press it again.
+ * the button stayspressed unless you press it again.
  */
-var Button = React.createClass({
+var Button = React.createClass({displayName: "Button",
   pressed: false,
   getInitialState: function() { return { pressed: this.pressed }; },
   componentDidMount: function() {
@@ -20,7 +20,7 @@ var Button = React.createClass({
       this.state.pressed ? "pressed" : '',
       this.props.name ? this.props.name : ''
     ].filter(function(v) { return !!v; }).join(" ");
-    return <button className={pclass} onClick={this.press}>{this.props.label}</button>;
+    return React.createElement("button", {className: pclass, onClick: this.press}, this.props.label);
   },
   reset: function() {
     this.pressed = false;

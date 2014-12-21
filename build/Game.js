@@ -1,4 +1,4 @@
-var Game = React.createClass({
+var Game = React.createClass({displayName: "Game",
 
   getInitialState: function() {
     return {
@@ -37,33 +37,33 @@ var Game = React.createClass({
     var wotrclass = "wind" + this.state.windoftheround;
 
     return (
-      <div className="game">
+      React.createElement("div", {className: "game"}, 
 
-        <div ref="info">
-          Hand: {this.state.hand} ({this.state.draws } draws) Wind of the round: <span className={wotrclass}>{this.state.windoftheround}</span>
-        </div>
+        React.createElement("div", {ref: "info"}, 
+          "Hand: ", this.state.hand, " (", this.state.draws, " draws) Wind of the round: ", React.createElement("span", {className: wotrclass}, this.state.windoftheround)
+        ), 
 
-        <div ref="players">
-          <Player ref="p1"></Player>
-          <Player ref="p2"></Player>
-          <Player ref="p3"></Player>
-          <Player ref="p4"></Player>
-        </div>
+        React.createElement("div", {ref: "players"}, 
+          React.createElement(Player, {ref: "p1"}), 
+          React.createElement(Player, {ref: "p2"}), 
+          React.createElement(Player, {ref: "p3"}), 
+          React.createElement(Player, {ref: "p4"})
+        ), 
 
-        <div ref="buttons" className="play-buttons">
-          <Button type="signal" ref="start" name="start" onClick={this.start} label="New Game" />
-          <Button type="signal" ref="reset" name="reset" onClick={this.reset} label="Reset this hand" />
-          <Button type="signal" ref="draw"  name="draw"  onClick={this.draw}  label="This hand is a draw" />
-          <Button type="signal" ref="score" name="score" onClick={this.score} label="Score" className="score"/>
-        </div>
+        React.createElement("div", {ref: "buttons", className: "play-buttons"}, 
+          React.createElement(Button, {type: "signal", ref: "start", name: "start", onClick: this.start, label: "New Game"}), 
+          React.createElement(Button, {type: "signal", ref: "reset", name: "reset", onClick: this.reset, label: "Reset this hand"}), 
+          React.createElement(Button, {type: "signal", ref: "draw", name: "draw", onClick: this.draw, label: "This hand is a draw"}), 
+          React.createElement(Button, {type: "signal", ref: "score", name: "score", onClick: this.score, label: "Score", className: "score"})
+        ), 
 
-        <div>Scoring extras:</div>
-        <WinModifiers ref="extras"></WinModifiers>
+        React.createElement("div", null, "Scoring extras:"), 
+        React.createElement(WinModifiers, {ref: "extras"}), 
 
-        <ScoringArea ref="scoring"></ScoringArea>
+        React.createElement(ScoringArea, {ref: "scoring"}), 
 
-        <Rules ref="rules"></Rules>
-      </div>
+        React.createElement(Rules, {ref: "rules"})
+      )
     );
   },
 
