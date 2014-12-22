@@ -210,11 +210,11 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 }
 
 .bonus .flowers button {
-  color: blue;
+  color: red;
 }
 
 .bonus .seasons button {
-  color: red;
+  color: blue;
 }
 
 .bonus button.pressed { color: transparent; border:1px solid black; }
