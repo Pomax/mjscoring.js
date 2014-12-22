@@ -1,7 +1,10 @@
-var StateRecorder = function() {
+var StateRecorder = function(repository) {
   this.bindings = {};
-  var fn = this.__loadState.bind(this);
-  window.addEventListener("popstate", fn);
+  this.repository = repository;
+  if(repository.restoreEvent && repository.restoreContext) {
+    var fn = this.loadState.bind(this);
+    repository.restoreContext.addEventListener(repository.restoreEvent, fn);
+  }
 };
 
 var nextId = (function() {
@@ -13,9 +16,7 @@ var nextId = (function() {
 
 StateRecorder.prototype = {
   register: function(object) {
-    if(!object.stateId) {
-      object.stateId = nextId();
-    }
+    if(!object.stateId) { object.stateId = nextId(); }
     this.bindings[object.stateId] = object;
   },
 
@@ -28,41 +29,28 @@ StateRecorder.prototype = {
     return fullState;
   },
 
-  // swap in this state as "the current page"
-  replaceState: function(title, url) {
-    title = title || "";
-    url = url || "";
-    var fullState = this.getFullState();
-    history.replaceState(fullState, title, url);
-  },
-
   // record the full state of every entity registered to this recorder
-  saveState: function(title, url) {
-    title = title || "";
-    url = url || "";
+  saveState: function(options) {
     var fullState = this.getFullState();
-    history.pushState(fullState, title, url);
+    this.repository.save(fullState, options);
   },
 
-  // load the full state from browsing history
-  loadState: function() {
-    history.back();
+  // swap in this state as "the current page"
+  replaceState: function(options) {
+    var fullState = this.getFullState();
+    this.repository.replace(fullState, options);
   },
 
   // restore to a previous state
-  __loadState: function(event) {
-    if(!event.state) {
-      console.log("no state to work with");
-      return;
-    }
+  loadState: function(event) {
+    if(!event.state) { return console.error("no state to work with"); }
 
-    var self = this;
     var fullState = event.state;
     Object.keys(this.bindings).forEach(function(stateId) {
-      var object = self.bindings[stateId];
+      var object = this.bindings[stateId];
       var state = fullState[stateId];
       if(object.loadState) { object.loadState(state); }
       else { object.setState(state); }
-    });
+    }.bind(this));
   }
 };
