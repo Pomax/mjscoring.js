@@ -64,7 +64,7 @@ var Player = React.createClass({
   // ==========================================
 
   overrideScore: function() {
-    var value = prompt("new value?");
+    var value = prompt("Please specify a new score for this player:");
     if(value) {
       this.currentScore = parseInt(value, 10);
       this.setState({ score: this.currentScore });
@@ -72,7 +72,7 @@ var Player = React.createClass({
   },
 
   overrideWins: function() {
-    var value = prompt("new value?");
+    var value = prompt("Please specify the number of wins this player:");
     if(value) {
       this.setState({ wins: parseInt(value, 10) });
     }

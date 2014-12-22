@@ -33,6 +33,7 @@ var TileBank = React.createClass({displayName: "TileBank",
     var banktiles = [];
     if (!tiles.forEach) { tiles = [tiles]; }
     tiles.forEach(function(tiles) {
+      tiles = tiles.replace(/[()]/g,'');
       // suited tiles?
       if(tiles.indexOf(".")>-1) {
         tiles = tiles.split(".");
