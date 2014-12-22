@@ -1,5 +1,7 @@
 var Game = React.createClass({displayName: "Game",
 
+  currentWOTR: 0,
+
   getInitialState: function() {
     return {
       hand: '-',
@@ -53,7 +55,8 @@ var Game = React.createClass({displayName: "Game",
           React.createElement(Button, {type: "signal", ref: "start", name: "start", onClick: this.start, label: "New Game"}), 
           React.createElement(Button, {type: "signal", ref: "reset", name: "reset", onClick: this.reset, label: "Reset this hand"}), 
           React.createElement(Button, {type: "signal", ref: "draw", name: "draw", onClick: this.draw, label: "This hand is a draw"}), 
-          React.createElement(Button, {type: "signal", ref: "score", name: "score", onClick: this.score, label: "Score", className: "score"})
+          React.createElement(Button, {type: "signal", ref: "score", name: "score", onClick: this.score, label: "Score", className: "score"}), 
+          React.createElement(Button, {type: "signal", ref: "next", name: "next", onClick: this.next, label: "Advance hand"})
         ), 
 
         React.createElement("div", null, "Scoring extras:"), 
@@ -83,6 +86,7 @@ var Game = React.createClass({displayName: "Game",
   // functions for enabling/disabling.
   __start: function() {
     this.refs.start.setDisabled(true);
+    this.refs.next.setDisabled(false);
     this.refs.reset.setDisabled(false);
     this.refs.draw.setDisabled(false);
     this.refs.score.setDisabled(false);
@@ -93,11 +97,17 @@ var Game = React.createClass({displayName: "Game",
     setTimeout(function() { stateRecorder.replaceState(); }, 500);
   },
 
+  next: function() {
+    // ensure we rotate on not-east
+    this.nextHand({ currentWind: 2 });
+  },
+
   // This is questionable, but I don't know how React wants me to do this
   // without writing a component that is IDENTICAL to <button> except with
   // functions for enabling/disabling.
   __endGame: function() {
     this.refs.start.setDisabled(false);
+    this.refs.next.setDisabled(true);
     this.refs.reset.setDisabled(true);
     this.refs.draw.setDisabled(true);
     this.refs.score.setDisabled(true);
@@ -149,6 +159,8 @@ var Game = React.createClass({displayName: "Game",
   nextHand: function(winner) {
     // set up the next hand
     var direction = this.rules.rotate(winner.currentWind);
+    var currentWOTR = this.state.windoftheround;
+    var finished = this.state.finished;
     if(winner && direction) {
       this.players.forEach(function(p) {
          p.nextWind(direction);
@@ -156,20 +168,27 @@ var Game = React.createClass({displayName: "Game",
 
       // advance the wind of the round
       if(this.players[0].currentWind === 0) {
-        this.setState({ windoftheround: this.state.windoftheround + 1 });
+        currentWOTR++;
       }
 
       // Game finished condition:
-      if(this.state.windoftheround >= 4) {
+      if(currentWOTR >= 4) {
         this.__endGame();
-        this.setState({ finished: true });
+        finished = true;
       }
     }
 
-    if(this.state.finished) {
-      this.setState({ windoftheround: '-'});
+    if(finished) {
+      this.setState({
+        hand: this.state.hand + ' played',
+        windoftheround: 'none, this game is finished.',
+        finished: true
+      });
     } else {
-      this.setState({ hand: this.state.hand + 1 });
+      this.setState({
+        windoftheround: currentWOTR,
+        hand: this.state.hand + 1
+      });
       this.reset();
     }
 

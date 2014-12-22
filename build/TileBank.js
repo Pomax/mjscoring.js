@@ -29,7 +29,7 @@ var TileBank = React.createClass({displayName: "TileBank",
   },
 
   setTiles: function(tiles) {
-    if(!tiles) return this.reset();
+    if(!tiles) tiles = [];
     var banktiles = [];
     if (!tiles.forEach) { tiles = [tiles]; }
     tiles.forEach(function(tiles) {

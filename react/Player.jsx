@@ -42,7 +42,7 @@ var Player = React.createClass({
         <div ref="playerinfo">
           <span className={windclass}>{this.state.wind}</span>
           <input type="text" className="name" value={this.state.name} placeholder="player name here" onChange={this.setName}/>
-          <span className="scoring">score: {this.state.score}/{this.state.wins}</span>
+          <span className="scoring">score: <span onClick={this.overrideScore}>{this.state.score}</span>/<span onClick={this.overrideWins}>{this.state.wins}</span></span>
         </div>
 
         <Bonus ref="bonus" />
@@ -59,6 +59,23 @@ var Player = React.createClass({
         <LimitHands ref="limits" />
       </div>
     );
+  },
+
+  // ==========================================
+
+  overrideScore: function() {
+    var value = prompt("new value?");
+    if(value) {
+      this.currentScore = parseInt(value, 10);
+      this.setState({ score: this.currentScore });
+    }
+  },
+
+  overrideWins: function() {
+    var value = prompt("new value?");
+    if(value) {
+      this.setState({ wins: parseInt(value, 10) });
+    }
   },
 
   // ==========================================

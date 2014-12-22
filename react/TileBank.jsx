@@ -29,10 +29,11 @@ var TileBank = React.createClass({
   },
 
   setTiles: function(tiles) {
-    if(!tiles) return this.reset();
+    if(!tiles) tiles = [];
     var banktiles = [];
     if (!tiles.forEach) { tiles = [tiles]; }
     tiles.forEach(function(tiles) {
+      tiles = tiles.replace(/[()]/g,'');
       // suited tiles?
       if(tiles.indexOf(".")>-1) {
         tiles = tiles.split(".");

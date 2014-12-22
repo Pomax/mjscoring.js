@@ -82,6 +82,9 @@ button.pressed {
   margin: 1em;
 }
 
+.game .next { opacity: 0.3; position: absolute; right: 4em; margin-top: 1em; }
+.game .next[disabled] { opacity: 0.7; }
+
 /*
   Keep the winds human readable, even if the source says they're numbers
 */
@@ -134,6 +137,22 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 
 .player .scoring {
   font-size: 90%;
+}
+
+.player .scoring .score, .player .scoring .wins {
+  display: inline-block;
+  border: none;
+  background: inherit;
+  text-align: center;
+  margin: 0;
+}
+
+.player .scoring .score {
+  width: 3.5em;
+}
+
+.player .scoring .wins {
+  width: 1.5em;
 }
 
 /*

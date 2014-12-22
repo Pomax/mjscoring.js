@@ -119,6 +119,7 @@ var Set = React.createClass({
     var joined = tiles.join('');
     var concealed = this.getConcealed();
     var wrap = function(input) {
+      if(!input) return input;
       return concealed ? "(" + input + ")" : input;
     };
     if(tiles.length>0) {

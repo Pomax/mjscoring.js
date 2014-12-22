@@ -42,7 +42,7 @@ var Player = React.createClass({displayName: "Player",
         React.createElement("div", {ref: "playerinfo"}, 
           React.createElement("span", {className: windclass}, this.state.wind), 
           React.createElement("input", {type: "text", className: "name", value: this.state.name, placeholder: "player name here", onChange: this.setName}), 
-          React.createElement("span", {className: "scoring"}, "score: ", this.state.score, "/", this.state.wins)
+          React.createElement("span", {className: "scoring"}, "score: ", React.createElement("span", {onClick: this.overrideScore}, this.state.score), "/", React.createElement("span", {onClick: this.overrideWins}, this.state.wins))
         ), 
 
         React.createElement(Bonus, {ref: "bonus"}), 
@@ -59,6 +59,23 @@ var Player = React.createClass({displayName: "Player",
         React.createElement(LimitHands, {ref: "limits"})
       )
     );
+  },
+
+  // ==========================================
+
+  overrideScore: function() {
+    var value = prompt("new value?");
+    if(value) {
+      this.currentScore = parseInt(value, 10);
+      this.setState({ score: this.currentScore });
+    }
+  },
+
+  overrideWins: function() {
+    var value = prompt("new value?");
+    if(value) {
+      this.setState({ wins: parseInt(value, 10) });
+    }
   },
 
   // ==========================================

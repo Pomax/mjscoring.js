@@ -229,8 +229,15 @@ var ChineseClassical = React.createClass({
     var concealedTriplets = 0;
     properties.forEach(function(p) { with(p) { if(same) {
       if (concealed && (pung||kong)) { concealedTriplets++; }
+/*
+  TODO: figure out how to deal with the following case, because a claimed pung -> kong
+        did not involve a concealed pung, whereas a conceal pung -> claimed kong does,
+        despite both simply being a "kong" in the set. Addition button for kongs?
+        Special "visibility" status for kongs? Hmmm...
+
       // a kong on the table that isn't concealed was a concealed pung, and counts.
       else if(kong) { concealedTriplets++; }
+*/
     }}});
     if(concealedTriplets >= 3) self.scoreDoubles(score, 1, "having three concealed triplets");
 
