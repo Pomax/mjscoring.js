@@ -134,7 +134,7 @@ HandGenerator.prototype = {
         for(tile=0; tile<(sequential?Math.min(16,end) : end); tile++) {
           if(sequential) {
             if(this.tiles[tile]===0 || this.tiles[tile+1]===0 || this.tiles[tile+2]===0
-               || this.tiles[tile]%9 > this.tiles[tile+1] % 9 || this.tiles[tile+1] % 9 > this.tiles[tile+2] %9)
+               || this.tiles[tile] % 9 > this.tiles[tile+1] % 9 || this.tiles[tile+1] % 9 > this.tiles[tile+2] % 9)
                  continue;
           }
           else if(this.tiles[tile]<tilecount) continue;
