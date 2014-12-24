@@ -13,8 +13,8 @@ HandGenerator.prototype = {
   odds: {
     // set types
     chow: 1,
-    pung: 0.1,
-    kong: 0.01,
+    pung: 0.2,
+    kong: 0.08,
     // face type
     numeric: 1,
     simple: 1,
@@ -83,6 +83,7 @@ HandGenerator.prototype = {
   },
 
   generate: function() {
+    this.winner = false;
     this.resetAvailableTiles();
     var hands = this.players.map(function(player) {
       var hand = this.generateHand();
@@ -103,11 +104,13 @@ HandGenerator.prototype = {
       if(bonus[i]) { this.tiles[34+i]--; }
     }
     // how many sets? we want a number with "higher" bias
-    var setCount = Math.round(Math.sqrt(25*Math.random()));
+    var base = this.winner ? 16 : 25;
+    var setCount = Math.round(Math.sqrt(base*Math.random()));
     var sets = []
     for(var i=0; i<setCount; i++) {
       var set = this.generateSet(i===4 ? "pair" : false);
       sets.push(set);
+      if(i===4) this.winner = true;
     }
     return { bonus: bonus, sets: sets };
   },
@@ -123,45 +126,54 @@ HandGenerator.prototype = {
 
     var tilecount = this.tilecount[settype];
     var sequential = (settype==="chow");
-    var start = 0;
-    var end = sequential? 3*9 : this.tileNames.length-8;
-    var tile = start + ((Math.random() * (end-start))|0);
+    var tiles = [], tile;
 
-    if(this.tiles[tile] < tilecount || (sequential && tile > 3*9-2)) {
-      (function(tilecount) {
-        // FIXME: we don't want to always start at 0, we want
-        // to start at tile and fan out instead.
-        for(tile=0; tile<(sequential?Math.min(16,end) : end); tile++) {
-          if(sequential) {
-            if(this.tiles[tile]===0 || this.tiles[tile+1]===0 || this.tiles[tile+2]===0
-               || this.tiles[tile] % 9 > this.tiles[tile+1] % 9 || this.tiles[tile+1] % 9 > this.tiles[tile+2] % 9)
-                 continue;
-          }
-          else if(this.tiles[tile]<tilecount) continue;
-          break;
-        }
-      }.bind(this)(settype === "chow" ? 1 : 3));
+    if(sequential) {
+      do {
+        var suit = Math.round(Math.random()*2);
+        tile = Math.round(Math.random()*6) + suit * 9;
+      } while(this.tiles[tile] === 0 && this.tiles[tile+1]===0 && this.tiles[tile+2]===0);
+      for(var t=0; t<3; t++) {
+        tiles.push(tile+t);
+        this.tiles[tile+t]--;
+      }
+    }
+    else {
+      do {
+        tile = Math.round(Math.random() * (this.tileNames.length - 8));
+      } while(this.tiles[tile] < tilecount);
+      while(tilecount-->0) {
+        tiles.push(tile);
+        this.tiles[tile]--;
+      }
     }
 
-    var tiles = [];
-    for(i=0; tilecount-->0; i++) {
-      tiles.push(sequential ? tile+i : tile);
-      this.tiles[sequential ? tile+i : tile]--;
-    }
-
-    return this.generateSetString(tiles);
+    return this.generateSetObject(tiles);
   },
 
-  generateSetString: function(tiles) {
-   console.log(tiles);
+  generateSetObject: function(tiles) {
     var suit = false, tm=0, tile=tiles[0];
-         if(tile<9)     { suit = "c"; }
-    else if(tile<(9*2)) { suit = "b"; tm=9; }
-    else if(tile<(9*3)) { suit = "d"; tm=18; }
+         if(tile<9)     { suit = "characters"; }
+    else if(tile<(9*2)) { suit = "bamboo"; tm=9; }
+    else if(tile<(9*3)) { suit = "dots"; tm=18; }
     else if(tile<this.tileNames.length) { tm = 18; }
-    tiles = tiles.map(function(v) { return v - tm; });
-   console.log(tiles);
-    return (suit?suit+".":'') + tiles.join('');
+    tiles = tiles.map(function(v) {
+      corrected = v - tm;
+      switch(corrected) {
+        case 9: return 'e';
+        case 10: return 's';
+        case 11: return 'w';
+        case 12: return 'n';
+        case 13: return 'f';
+        case 14: return 'c';
+        case 15: return 'p';
+        default: return (corrected+1);
+      }
+    });
+    return {
+      suit: suit,
+      tiles: tiles.join('')
+    };
   }
 
 };

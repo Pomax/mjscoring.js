@@ -48,6 +48,13 @@ var Bonus = React.createClass({
 
   setDisabled: function(b) {
     this.buttons.forEach(function(s) { s.setDisabled(b); });
+  },
+
+  setBonus: function(states) {
+    var self = this;
+    states.forEach(function(b, idx) {
+      self.buttons[idx].setPressed(b);
+    });
   }
 
 });

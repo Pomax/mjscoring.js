@@ -54,30 +54,39 @@ var Set = React.createClass({
 
   updateSet: function(event) {
     var string = event.target.value;
+    this.setTiles(string);
+  },
+
+  setTiles: function(string, suit) {
     if(string) {
+
+      if(suit) { this.refs[suit].setPressed(true); }
+      this.refs.tiles.getDOMNode().value = string;
+
       if(string.match(/\d/)) {
         if(string.indexOf("c")>-1) {
           string = string.replace('c','');
           event.target.value = string;
-          this.refs.characters.press({target:false});
+          this.refs.characters.setPressed(false);
         }
         else if(string.indexOf("b")>-1) {
           string = string.replace('b','');
           event.target.value = string;
-          this.refs.bamboo.press({target:false});
+          this.refs.bamboo.setPressed(false);
         }
         else if(string.indexOf("d")>-1) {
           string = string.replace('d','');
           event.target.value = string;
-          this.refs.dots.press({target:false});
+          this.refs.dots.setPressed(false);
         }
       }
       if(string.match(/!/)) {
         string = string.replace('!','');
         event.target.value = string;
-        this.refs.concealed.press({target:false});
+        this.refs.concealed.setPressed(false);
       }
-      this.updateTileBank(this.getTilesString());
+      var tstring = this.getTilesString();
+      this.updateTileBank(tstring);
     } else { this.updateTileBank(false); }
 
     this.setState({ set: string });

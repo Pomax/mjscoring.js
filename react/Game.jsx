@@ -25,6 +25,9 @@ var Game = React.createClass({
     this.rules.setPlayers(this.players);
     this.scores = this.refs.scoring;
     this.__endGame();
+
+    var hg = new HandGenerator(this.players);
+    hg.generate();
   },
 
   loadState: function(state) {
@@ -93,6 +96,7 @@ var Game = React.createClass({
     this.refs.extras.setDisabled(false);
     this.players.forEach(function(p) { p.setDisabled(false); });
     this.reset();
+
     // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
     setTimeout(function() { stateRecorder.replaceState(); }, 500);
   },

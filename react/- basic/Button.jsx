@@ -42,6 +42,10 @@ var Button = React.createClass({
   isPressed: function() {
     return this.pressed;
   },
+  setPressed: function(b) {
+    this.pressed = b;
+    this.setState({ pressed: b });
+  },
   isDisabled: function() {
     return this.disabled;
   },

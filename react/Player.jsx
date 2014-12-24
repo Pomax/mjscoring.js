@@ -13,7 +13,8 @@ var Player = React.createClass({
       wind: 0,
       name: '',
       score: 0,
-      wins: 0
+      wins: 0,
+      disabled: false
     };
   },
 
@@ -37,8 +38,10 @@ var Player = React.createClass({
 
   render: function() {
     var windclass = "wind" + this.state.wind;
+    var className = "player pwidth";
+    if(this.state.disabled) { className += " disabled"; }
     return (
-      <div className="player pwidth">
+      <div className={className}>
         <div ref="playerinfo">
           <span className={windclass}>{this.state.wind}</span>
           <input type="text" className="name" value={this.state.name} placeholder="player name here" onChange={this.setName}/>
@@ -157,6 +160,15 @@ var Player = React.createClass({
     this.sets.forEach(function(s) { s.setDisabled(b); });
     this.refs.ninetile.setDisabled(b);
     this.refs.illegal.setDisabled(b);
-  }
+    this.setState({ disabled: b });
+  },
 
+  // debugging/showboating
+  setHand: function(h) {
+    var self = this;
+    this.refs.bonus.setBonus(h.bonus);
+    h.sets.forEach(function(s, idx) {
+      self.refs["s" +(1+idx)].setTiles(s.tiles, s.suit);
+    });
+  }
 });
