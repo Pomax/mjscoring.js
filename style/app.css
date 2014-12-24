@@ -103,7 +103,7 @@ span.wind3:before { content: '北'; font-weight: bold; color: black; }
 
 .player {
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid #AEAEAE;
   padding: 4px;
   overflow: hidden;
 }
@@ -248,34 +248,46 @@ select.limits {
   Scoring
 */
 
-.scoring-history {
-  display: inline-block;
-  padding: 4px;
+table.scoring-area {
+  margin-top: 1em;
+  width: 100%;
+}
+
+table.scoring-area td {
   vertical-align: top;
 }
 
-.scoring-history .entry {
+table.scoring-area td:nth-child(1) {
+  background: #F4F4F4;
+  width: 5em;
+  vertical-align: middle;
+  text-align: center;
+}
+
+table.scoring-area .entry {
   display: block;
   border: 1px solid black;
   padding: 2px;
   margin-bottom: 0.2em;
   cursor: pointer;
   font-size: 80%;
+  width: 28em;
+  text-align: center;
 }
 
-.scoring-history entry .tiles {
+table.scoring-area .entry .tiles {
   font-family: monospace;
 }
 
-.scoring-history .entry .info:before {
+table.scoring-area .entry .info:before {
   content: attr(data-amount);
 }
 
-.scoring-history .entry .info[data-winner=true]:before {
+table.scoring-area .entry .info[data-winner=true]:before {
   font-weight: bold;
 }
 
-.scoring-history .entry .log {
+table.scoring-area .entry .log {
   margin-top: 0.2em;
   white-space: pre;
   text-align: left;
@@ -284,12 +296,12 @@ select.limits {
   border-top: 1px solid #666;
 }
 
-.scoring-history .entry .log .tilebank {
+table.scoring-area .entry .log .tilebank {
   width: 100%;
   background: inherit;
 }
 
-.scoring-history .entry .log .tilebank .tile {
+table.scoring-area .entry .log .tilebank .tile {
   width: 6%;
 }
 

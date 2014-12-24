@@ -156,7 +156,8 @@ var Game = React.createClass({
 
     stateRecorder.replaceState();
 
-    this.rules.award(this.players, scores, this.scores);
+    var scoringResult = this.rules.award(this.players, scores);
+    this.scores.recordHands(scoringResult, this.state.hand, this.state.windoftheround);
     this.nextHand(winner);
   },
 

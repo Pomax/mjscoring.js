@@ -1,22 +1,29 @@
 var ScoringArea = React.createClass({
 
+  getInitialState: function() {
+    return { entries: [] };
+  },
+
   componentDidMount: function() {
-    this.histories = [ this.refs.history1, this.refs.history2, this.refs.history3, this.refs.history4];
+    stateRecorder.register(this);
   },
 
   render: function() {
-    return (
-      <div ref="scoring" className="scoring-area">
-        <ScoringHistory ref="history1" />
-        <ScoringHistory ref="history2" />
-        <ScoringHistory ref="history3" />
-        <ScoringHistory ref="history4" />
-      </div>
-    );
+    var rows = this.state.entries.map(function(entry, idx) {
+      return <ScoringRow scores={entry.scores} hand={entry.hand} windoftheround={entry.wotr} key={idx} />;
+    });
+    return <table ref="scoring" className="scoring-area">{rows}</table>;
   },
 
-  recordHand: function(pid, hand) {
-    this.histories[pid].addHand(hand);
+  recordHands: function(hands, currenthand, windoftheround) {
+    var entry = {
+      scores: hands,
+      hand: currenthand,
+      wotr: windoftheround
+    };
+    this.setState({
+      entries: ([entry]).concat(this.state.entries)
+    });
   }
 
 });

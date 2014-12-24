@@ -43,8 +43,8 @@ var Rules = React.createClass({
     return score;
   },
 
-  award: function(players, scores, scoringarea) {
-    this.ruleset.award(players, scores, scoringarea);
+  award: function(players, scores) {
+    return this.ruleset.award(players, scores);
   },
 
   // special penalties

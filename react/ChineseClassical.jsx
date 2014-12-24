@@ -405,11 +405,11 @@ var ChineseClassical = React.createClass({
       }
     }
 
-    // and finally we chronicle these scores in the scoring area
-    players.forEach(function(p, idx) {
+    // and finally we process the balance and return the scoring results
+    return players.map(function(p, idx) {
       scores[idx].balance = balance[idx];
       p.receivePoints(balance[idx]);
-      scoringarea.recordHand(idx, scores[idx].getHand());
+      return scores[idx].getHand();
     });
   },
 
