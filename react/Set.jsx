@@ -1,7 +1,10 @@
 var Set = React.createClass({
 
   getInitialState: function() {
-    return { set: '' };
+    return {
+      set: '',
+      ckong: false // indicates claimed kong based on a concealed pung
+    };
   },
 
   componentDidMount: function() {
@@ -20,13 +23,15 @@ var Set = React.createClass({
         <Button ref="characters" name="characters" onClick={this.press} label="萬" />
         <Button ref="bamboo"     name="bamboo"     onClick={this.press} label="竹" />
         <Button ref="dots"       name="dots"       onClick={this.press} label="◎" />
-        <TileBank ref="tilebank" />
+        <TileBank ref="tilebank" concealed={this.state.ckong} bankpress={this.bankpress}/>
         <Button ref="concealed"  name="concealed"  label="..." />
       </div>
     );
   },
 
+
   // ==========================================
+
 
   updateTileBank: function(tiles) {
     this.refs.tilebank.setTiles(tiles);
@@ -50,6 +55,12 @@ var Set = React.createClass({
     });
     var newtiles = this.getTilesString();
     this.updateTileBank(newtiles);
+  },
+
+  // record a kong-from-concealed-pung vs. kong-from-melded-pung:
+  bankpress: function(event) {
+    if(this.getTiles().length !== 4) return;
+    this.setState({ ckong: !this.state.ckong });
   },
 
   updateSet: function(event) {

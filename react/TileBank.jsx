@@ -13,15 +13,15 @@ var TileBank = React.createClass({
   },
 
   render: function() {
+    var concealed = this.props.concealed;
     var tiles = this.state.tiles.map(function(tile, idx) {
-      var key = tile.suit + tile.face + idx;
-      return <Tile suit={tile.suit} face={tile.face} key={key}/>
+      var ic = (idx!==3 && concealed);
+      var suit = ic ? '' : tile.suit;
+      var face = ic ? "concealed" : tile.face;
+      var key = tile.suit + tile.face + idx + (ic?'ic':'');
+      return <Tile suit={suit} face={face} key={key}/>
     });
-    return (
-      <div className="tilebank">
-        {tiles}
-      </div>
-    );
+    return <div className="tilebank" onClick={this.props.bankpress}>{tiles}</div>;
   },
 
   reset: function() {
