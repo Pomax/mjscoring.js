@@ -74,13 +74,18 @@ var Game = React.createClass({
 
   // ==========================================
 
+  cache: function() {
+    // caches the entire app state for great win
+    stateRecorder.saveState();
+  },
+
   start: function() {
+    this.__start();
     this.setState({
       hand: 1,
       draws: 0,
       windoftheround: 0
-    });
-    this.__start();
+    }, this.cache);
     document.dispatchEvent(new CustomEvent("game-started", { detail: {} }));
   },
 
@@ -88,6 +93,7 @@ var Game = React.createClass({
   // without writing a component that is IDENTICAL to <button> except with
   // functions for enabling/disabling.
   __start: function() {
+    this.reset();
     this.refs.start.setDisabled(true);
     this.refs.next.setDisabled(false);
     this.refs.reset.setDisabled(false);
@@ -95,10 +101,6 @@ var Game = React.createClass({
     this.refs.score.setDisabled(false);
     this.refs.extras.setDisabled(false);
     this.players.forEach(function(p) { p.setDisabled(false); });
-    this.reset();
-
-    // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
-    setTimeout(function() { stateRecorder.replaceState(); }, 500);
   },
 
   next: function() {
@@ -188,17 +190,14 @@ var Game = React.createClass({
         hand: this.state.hand + ' played',
         windoftheround: 'none, this game is finished.',
         finished: true
-      });
+      }, this.cache);
     } else {
+      this.reset();
       this.setState({
         windoftheround: currentWOTR,
         hand: this.state.hand + 1
-      });
-      this.reset();
+      }, this.cache);
     }
-
-    // FIXME: THIS IS GROSS, THERE HAS TO BE A BETTER WAY
-    setTimeout(function() { stateRecorder.saveState(); }, 500);
   }
 
 });
