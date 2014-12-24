@@ -37,7 +37,7 @@ var Button = React.createClass({
       this.pressed = !this.pressed;
       this.setState({ pressed: this.pressed });
     }
-    if(this.props.onClick) { event.target = this; this.props.onClick(event); }
+    if(event && this.props.onClick) { event.target = this; this.props.onClick(event); }
   },
   isPressed: function() {
     return this.pressed;

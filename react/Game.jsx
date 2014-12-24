@@ -72,12 +72,12 @@ var Game = React.createClass({
     );
   },
 
+  // caches the entire app state for great win
+  cache: function() { stateRecorder.saveState(); },
+
+
   // ==========================================
 
-  cache: function() {
-    // caches the entire app state for great win
-    stateRecorder.saveState();
-  },
 
   start: function() {
     this.__start();

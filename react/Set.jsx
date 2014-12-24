@@ -46,7 +46,7 @@ var Set = React.createClass({
     ["characters", "bamboo", "dots"].forEach(function(ref) {
       var button = self.refs[ref];
       if (event.target === button) return;
-      button.reset();
+      button.setPressed(false);
     });
     var newtiles = this.getTilesString();
     this.updateTileBank(newtiles);
@@ -58,32 +58,40 @@ var Set = React.createClass({
   },
 
   setTiles: function(string, suit) {
+    var target, button;
     if(string) {
-
       if(suit) { this.refs[suit].setPressed(true); }
-      this.refs.tiles.getDOMNode().value = string;
+
+      target = this.refs.tiles.getDOMNode();
+      target.value = string;
 
       if(string.match(/\d/)) {
         if(string.indexOf("c")>-1) {
           string = string.replace('c','');
-          event.target.value = string;
-          this.refs.characters.setPressed(false);
+          target.value = string;
+          button = this.refs.characters;
+          button.press();
+          this.press({ target: button });
         }
         else if(string.indexOf("b")>-1) {
           string = string.replace('b','');
-          event.target.value = string;
-          this.refs.bamboo.setPressed(false);
+          target.value = string;
+          button = this.refs.bamboo;
+          button.press();
+          this.press({ target: button });
         }
         else if(string.indexOf("d")>-1) {
           string = string.replace('d','');
-          event.target.value = string;
-          this.refs.dots.setPressed(false);
+          target.value = string;
+          button = this.refs.dots;
+          button.press();
+          this.press({ target: button });
         }
       }
       if(string.match(/!/)) {
         string = string.replace('!','');
-        event.target.value = string;
-        this.refs.concealed.setPressed(false);
+        target.value = string;
+        this.refs.concealed.press();
       }
       var tstring = this.getTilesString();
       this.updateTileBank(tstring);
