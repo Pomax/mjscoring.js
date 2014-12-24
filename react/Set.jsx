@@ -17,7 +17,7 @@ var Set = React.createClass({
     return (
       <div className="set">
         <input  ref="tiles" type="text" value={this.state.set} onChange={this.updateSet} />
-        <Button ref="characters" name="characters" onClick={this.press} label="満" />
+        <Button ref="characters" name="characters" onClick={this.press} label="萬" />
         <Button ref="bamboo"     name="bamboo"     onClick={this.press} label="竹" />
         <Button ref="dots"       name="dots"       onClick={this.press} label="◎" />
         <TileBank ref="tilebank" />
