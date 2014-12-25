@@ -26,13 +26,17 @@ var Bonus = React.createClass({
     );
   },
 
+
   // ==========================================
+
 
   reset: function() { this.buttons.forEach(function(button) { button.reset(); })},
   getFlowers: function() { return this.flowers.map(function(button) { return button.isPressed(); }); },
   getSeasons: function() { return this.seasons.map(function(button) { return button.isPressed(); }); },
 
-  // when a bonus tile is claimed, unpress this tile for all other players
+  /**
+   * when a bonus tile is claimed, unpress this tile for all other players
+   */
   handleExclusion: function(event) {
     document.dispatchEvent(new CustomEvent("bonustile-claimed", {detail: {
       name: event.target.props.name,
@@ -40,7 +44,9 @@ var Bonus = React.createClass({
     }}));
   },
 
-  // event handler for the custom event that gets thrown above
+  /**
+   * event handler for the custom event that gets thrown above
+   */
   handleClaim: function(event) {
     if(event.detail.source === this) return;
     this.refs[event.detail.name].reset();

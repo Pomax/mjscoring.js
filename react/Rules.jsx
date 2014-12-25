@@ -13,7 +13,9 @@ var Rules = React.createClass({
     );
   },
 
+
   // ==========================================
+
 
   setPlayers: function(players) {
     this.players = players;

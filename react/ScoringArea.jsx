@@ -15,6 +15,10 @@ var ScoringArea = React.createClass({
     return <table ref="scoring" className="scoring-area">{rows}</table>;
   },
 
+
+  // ==========================================
+
+
   recordHands: function(hands, currenthand, windoftheround) {
     var entry = {
       scores: hands,

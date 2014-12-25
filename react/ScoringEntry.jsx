@@ -19,6 +19,10 @@ var ScoringEntry = React.createClass({
     );
   },
 
+
+  // ==========================================
+
+
   revealLog: function() {
     this.refs.log.getDOMNode().classList.remove("hidden");
   },

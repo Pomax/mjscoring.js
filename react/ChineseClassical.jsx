@@ -1,3 +1,10 @@
+/**
+ * I am still on the fence about whether to make this a plain JS library
+ * or whether to keep this a React component. As a React component it can
+ * be made to report things like limits, base points, etc. if you want to
+ * compare rulesets, so I will likely keep it the way it is now, just
+ * extend it with a meaningful render function rather than the stub.
+ */
 var ChineseClassical = React.createClass({
 
   winds: ['e', 's', 'w', 'n'],

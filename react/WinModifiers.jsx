@@ -30,7 +30,9 @@ var WinModifiers = React.createClass({
     );
   },
 
+
   // ==========================================
+
 
   reset: function() {
     var self = this;

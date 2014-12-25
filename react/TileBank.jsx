@@ -24,6 +24,10 @@ var TileBank = React.createClass({
     return <div className="tilebank" onClick={this.props.bankpress}>{tiles}</div>;
   },
 
+
+  // ==========================================
+
+
   reset: function() {
     this.setState({ tiles: [] });
   },

@@ -1,5 +1,7 @@
 var Set = React.createClass({
 
+  resets: ["characters", "bamboo", "dots", "tilebank", "concealed"],
+
   getInitialState: function() {
     return {
       set: '',
@@ -33,17 +35,15 @@ var Set = React.createClass({
   // ==========================================
 
 
-  updateTileBank: function(tiles) {
-    this.refs.tilebank.setTiles(tiles);
-  },
-
   reset: function() {
     this.setState({ set: '' });
-    this.refs.characters.reset();
-    this.refs.bamboo.reset();
-    this.refs.dots.reset();
-    this.refs.concealed.reset();
-    this.refs.tilebank.reset();
+    this.resets.forEach(function(ref) {
+      this.refs[ref].reset();
+    }.bind(this));
+  },
+
+  updateTileBank: function(tiles) {
+    this.refs.tilebank.setTiles(tiles);
   },
 
   press: function(event) {
@@ -57,7 +57,10 @@ var Set = React.createClass({
     this.updateTileBank(newtiles);
   },
 
-  // record a kong-from-concealed-pung vs. kong-from-melded-pung:
+  /**
+   * For concealed triplet purposes, we need to distinguish between a
+   * kong-from-concealed-pung vs. kong-from-melded-pung...
+   */
   bankpress: function(event) {
     if(this.getTiles().length !== 4) return;
     this.setState({ ckong: !this.state.ckong });

@@ -66,6 +66,9 @@ var Player = React.createClass({
 
   // ==========================================
 
+  /**
+   * In case we're resuming some old game, we want to be able to override the scores.
+   */
   overrideScore: function() {
     var value = prompt("Please specify a new score for this player:");
     if(value) {
@@ -74,6 +77,9 @@ var Player = React.createClass({
     }
   },
 
+  /**
+   * In case we're resuming some old game, we want to be able to override the wins.
+   */
   overrideWins: function() {
     var value = prompt("Please specify the number of wins this player:");
     if(value) {
@@ -81,20 +87,19 @@ var Player = React.createClass({
     }
   },
 
-  // ==========================================
-
   setName: function(event) {
     this.setState({ name: event.target.value });
   },
 
+  /**
+   * This is not an action that should go unconfirmed... it's a heavy loss.
+   */
   confirmIllegalOut: function(event) {
     var reason = "declaring a win despite not having a winning hand";
     var msg = "Are you sure you want this player to be penalised for " + reason + "?";
     var confirmed = confirm(msg);
     if(confirmed) { this.game.processIllegalOut(this); }
   },
-
-  // ==========================================
 
   setGame: function(game) {
     this.game = game;
@@ -112,15 +117,14 @@ var Player = React.createClass({
     this.refs.ninetile.reset();
   },
 
+  /**
+   * The rules specify certain aspects that are relevant to individual players.
+   */
   useRules: function(rules) {
     this.rules = rules;
     this.currentScore = rules.base;
     this.setState({ score: this.currentScore });
     this.refs.limits.useRules(rules);
-  },
-
-  markEast: function() {
-    this.set("east",true);
   },
 
   nextWind: function(direction) {
@@ -146,11 +150,17 @@ var Player = React.createClass({
     return this.refs.ninetile.isPressed();
   },
 
+  /**
+   * Points won (or lost, if negative)
+   */
   receivePoints: function(amount) {
     this.currentScore += amount;
     this.setState({ score: this.currentScore });
   },
 
+  /**
+   * This player's won a hand.
+   */
   receiveWin: function() {
     this.setState({ wins: this.state.wins + 1 });
   },
@@ -163,7 +173,10 @@ var Player = React.createClass({
     this.setState({ disabled: b });
   },
 
-  // debugging/showboating
+  /**
+   * Mostly used for debugging and showing a random set of hands when the app first loads.
+   * That said, might try to tie this into the MJJS pure-js Mahjong stuff, for gameplay.
+   */
   setHand: function(h) {
     var self = this;
     this.refs.bonus.setBonus(h.bonus);
