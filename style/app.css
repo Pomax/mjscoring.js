@@ -1,3 +1,7 @@
+/*
+  Styling for guide text
+*/
+
 section {
   width: 1024px;
   margin: auto;
@@ -14,14 +18,20 @@ section.slideout {
   Universal styling
 */
 
-#app {
-  text-align: center;
-}
-
 * {
   font-family: Verdana, "MS Mincho";
   font-size: 14px;
   outline: 0;
+}
+
+*, *:focus {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline-style:none;/*IE*/
 }
 
 body > h1 {
@@ -59,6 +69,13 @@ button.pressed {
   opacity: 0.5!important;
 }
 
+/*
+  App styling
+*/
+
+#app {
+  text-align: center;
+}
 
 /*
   Game styling
@@ -253,6 +270,10 @@ table.scoring-area {
   width: 100%;
 }
 
+table.scoring-area tr {
+  cursor: pointer;
+}
+
 table.scoring-area td {
   vertical-align: top;
 }
@@ -260,8 +281,16 @@ table.scoring-area td {
 table.scoring-area td:nth-child(1) {
   background: #F4F4F4;
   width: 5em;
-  vertical-align: middle;
   text-align: center;
+}
+
+table.scoring-area td:nth-child(1) span {
+  display: inline-block;
+  margin-top: 0.75em;
+}
+
+table.scoring-area td:nth-child(1) span + span {
+  margin-left: 0.5em;
 }
 
 table.scoring-area .entry {
@@ -269,7 +298,6 @@ table.scoring-area .entry {
   border: 1px solid black;
   padding: 2px;
   margin-bottom: 0.2em;
-  cursor: pointer;
   font-size: 80%;
   width: 28em;
   text-align: center;

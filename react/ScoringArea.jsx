@@ -10,7 +10,7 @@ var ScoringArea = React.createClass({
 
   render: function() {
     var rows = this.state.entries.map(function(entry, idx) {
-      return <ScoringRow scores={entry.scores} hand={entry.hand} windoftheround={entry.wotr} key={idx} />;
+      return <ScoringRow scores={entry.scores} hand={entry.hand} windoftheround={entry.wotr} key={idx} showdetails={idx===0}/>;
     });
     return <table ref="scoring" className="scoring-area">{rows}</table>;
   },
