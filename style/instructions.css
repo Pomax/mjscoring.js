@@ -1,0 +1,83 @@
+.instruction-button {
+  position: absolute;
+  right: 4em;
+}
+.overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.5);
+}
+.instructions {
+  background: white;
+  position: fixed;
+  z-index: 2;
+  top: 4em;
+  left: 4em;
+  right: 4em;
+  bottom: 4em;
+  overflow-y:
+  scroll;
+  padding: 2em;
+  border: 1px solid grey;
+  text-align: left;
+}
+.instructions img {
+  max-height: 2em;
+  border: 1px solid grey;
+  vertical-align: middle;
+}
+.instructions td {
+  text-align: center;
+}
+.instructions ol, .instructions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.instructions li {
+  vertical-align: middle;
+}
+.instructions button {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  vertical-align: middle
+}
+.instructions div.lpane {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 7em;
+  margin-top: -1em;
+}
+.instructions .instructionset {
+  background: #DDD;
+  display: inline-block;
+  padding: 2px;
+  font-size: 0;
+}
+.instructions .instructionset input {
+  width: 5em;
+  height: 2em;
+  margin-right: 5px;
+}
+.instructions .instructionset button {
+  border: 1px solid grey;
+  display: inline-block;
+  height:2em;
+  width:2em;
+}
+.instructions .instructionset * {
+  font-size: 14px;
+  vertical-align: middle;
+}
+.instructions .instructionset span {
+  display: inline-block;
+  font-size: 0;
+  margin: 0 5px 0 5px;
+}
+.instructions .instructionset span.clickthis {
+  border:1px solid red;
+}

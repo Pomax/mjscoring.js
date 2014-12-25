@@ -1,0 +1,147 @@
+<style>
+.instructions img {
+  max-height: 2em;
+  border: 1px solid grey;
+  vertical-align: middle;
+}
+.instructions td {
+  text-align: center;
+}
+.instructions ol, .instructions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.instructions li {
+  vertical-align: middle;
+}
+.instructions button {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  vertical-align: middle
+}
+</style>
+
+<h1>How to record scores</h1>
+
+<p>The following keys can be used in the input box to score tiles, with some "hotkeys" if you don't want to press the suit/concealment buttons.<p>
+
+<h2>Suited tiles</h2>
+
+<p>suited tiles simply use the tile's number, with the following hotkey letters anywhere in the pattern to set the suit:</p>
+
+<ul>
+  <li>
+    <img src="/style/tiles/c1.jpg" alt="c1">
+    <img src="/style/tiles/c2.jpg" alt="c2">
+    <img src="/style/tiles/c3.jpg" alt="c3">
+    <img src="/style/tiles/c4.jpg" alt="c4">
+    <img src="/style/tiles/c5.jpg" alt="c5">
+    <img src="/style/tiles/c6.jpg" alt="c6">
+    <img src="/style/tiles/c7.jpg" alt="c7">
+    <img src="/style/tiles/c8.jpg" alt="c8">
+    <img src="/style/tiles/c9.jpg" alt="c9">
+    -
+    number 1-9 plus "c" for characters or the <button>萬</button> button.</li>
+  <li>
+    <img src="/style/tiles/b1.jpg" alt="b1">
+    <img src="/style/tiles/b2.jpg" alt="b2">
+    <img src="/style/tiles/b3.jpg" alt="b3">
+    <img src="/style/tiles/b4.jpg" alt="b4">
+    <img src="/style/tiles/b5.jpg" alt="b5">
+    <img src="/style/tiles/b6.jpg" alt="b6">
+    <img src="/style/tiles/b7.jpg" alt="b7">
+    <img src="/style/tiles/b8.jpg" alt="b8">
+    <img src="/style/tiles/b9.jpg" alt="b9">
+    -
+    number 1-9 plus "b" for bamboo or the <button>竹</button> button.</li>
+  <li>
+    <img src="/style/tiles/d1.jpg" alt="d1">
+    <img src="/style/tiles/d2.jpg" alt="d2">
+    <img src="/style/tiles/d3.jpg" alt="d3">
+    <img src="/style/tiles/d4.jpg" alt="d4">
+    <img src="/style/tiles/d5.jpg" alt="d5">
+    <img src="/style/tiles/d6.jpg" alt="d6">
+    <img src="/style/tiles/d7.jpg" alt="d7">
+    <img src="/style/tiles/d8.jpg" alt="d8">
+    <img src="/style/tiles/d9.jpg" alt="d9">
+    -
+    number 1-9 plus "d" for dots or the <button>◎</button> button.</li>
+</ul>
+
+<h2>Honour tiles</h2>
+
+<style>
+.instructions div.lpane { display: inline-block; vertical-align: top; margin-right: 7em; margin-top: -1em; }
+</style>
+
+<div class="lpane">
+  <p>winds:</p>
+
+  <ul>
+    <li><img src="/style/tiles/e.jpg" alt="東"> - east: "e"</li>
+    <li><img src="/style/tiles/s.jpg" alt="南"> - south: "s"</li>
+    <li><img src="/style/tiles/w.jpg" alt="西"> - west: "w"</li>
+    <li><img src="/style/tiles/n.jpg" alt="北"> - north: "n"</li>
+  </ul>
+</div>
+
+<div class="lpane">
+  <p>dragons:</p>
+
+  <ul>
+    <li><img src="/style/tiles/f.jpg" alt="發"> - green dragon: "f"</li>
+    <li><img src="/style/tiles/c.jpg" alt="中"> - red dragon: "c"</li>
+    <li><img src="/style/tiles/p.jpg" alt="□ "> - white dragon: "p"</li>
+  </ul>
+</div>
+
+<h2>Marking tiles as concealed</h2>
+
+<p>Any pattern can be marked as concealed either by typing "!" in the input field, or pressing the <button>...</button> button on the far right of a set.</p>
+
+<h2>Special concealment for kongs</h2>
+
+<p>If a player draws a fourth tile of an already revealed pung, simply add that tile to the already recorded pung. Likewise, if a kong is played fully concealed, record it normally. However, if a player claims a tile from someone's discard to form a kong, they already had a concealed pung in their hand. This is an important disctinction for scoring the "three concealed triplets" bonus, and can be recorded by writing down the kong as a normal, unconcealed kong, then clicking the actual tiles shown in the set:</p>
+
+<style>
+.instructions .Set { background: #DDD; display: inline-block; padding: 2px; font-size: 0;}
+.instructions .Set input { width: 5em; height: 2em; margin-right: 5px; }
+.instructions .Set button { border: 1px solid grey; display: inline-block; height:2em; width:2em; }
+.instructions .Set * { font-size: 14px; vertical-align: middle; }
+.instructions .Set span { display: inline-block; font-size: 0; margin: 0 5px 0 5px; }
+.instructions .Set span.clickthis { border:1px solid red; }
+</style>
+
+<div class="Set">
+  <input type="text" value="eeee">
+  <button>萬</button>
+  <button>竹</button>
+  <button>◎</button>
+  <span class="clickthis">
+    <img src="/style/tiles/e.jpg">
+    <img src="/style/tiles/e.jpg">
+    <img src="/style/tiles/e.jpg">
+    <img src="/style/tiles/e.jpg">
+  </span>
+  <button>...</button>
+</div>
+
+<p>becomes, after clicking the collection of tile images shown:</p>
+
+<div class="Set">
+  <input type="text" value="eeee">
+  <button>萬</button>
+  <button>竹</button>
+  <button>◎</button>
+  <span>
+    <img src="/style/tiles/concealed.jpg">
+    <img src="/style/tiles/concealed.jpg">
+    <img src="/style/tiles/concealed.jpg">
+    <img src="/style/tiles/e.jpg">
+  </span>
+  <button>...</button>
+</div>
+
+<p>This signals that the original pung was concealed, while the kong itself is open on the table.</p>

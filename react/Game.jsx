@@ -51,10 +51,10 @@ var Game = React.createClass({
         </div>
 
         <div ref="players">
-          <Player ref="p1"></Player>
-          <Player ref="p2"></Player>
-          <Player ref="p3"></Player>
-          <Player ref="p4"></Player>
+          <Player ref="p1" />
+          <Player ref="p2" />
+          <Player ref="p3" />
+          <Player ref="p4" />
         </div>
 
         <div ref="buttons" className="play-buttons">
@@ -63,14 +63,14 @@ var Game = React.createClass({
           <Button type="signal" ref="draw"  name="draw"  onClick={this.draw}    label="This hand is a draw" />
           <Button type="signal" ref="score" name="score" onClick={this.score}   label="Score" className="score"/>
           <Button type="signal" ref="next"  name="next"  onClick={this.advance} label="Advance hand" />
+          <AppInstructions />
         </div>
 
         <div>Scoring extras:</div>
-        <WinModifiers ref="extras"></WinModifiers>
 
-        <ScoringArea ref="scoring"></ScoringArea>
-
-        <Rules ref="rules"></Rules>
+        <WinModifiers ref="extras" />
+        <ScoringArea ref="scoring" />
+        <Rules ref="rules" />
       </div>
     );
   },

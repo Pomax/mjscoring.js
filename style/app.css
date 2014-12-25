@@ -18,6 +18,13 @@ section.slideout {
   Universal styling
 */
 
+html, body {
+  /* necessary because of the select prevention. Without this,
+     clicking below the content means clicking the <html> element,
+     which immediately selects all the selectable text... */
+  min-height: 100%;
+}
+
 * {
   font-family: Verdana, "MS Mincho";
   font-size: 14px;
