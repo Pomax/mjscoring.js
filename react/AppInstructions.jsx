@@ -22,39 +22,39 @@ var AppInstructions = React.createClass({
 
             <ul>
               <li>
-                <img src="/style/tiles/c1.jpg" alt="c1"/>
-                <img src="/style/tiles/c2.jpg" alt="c2"/>
-                <img src="/style/tiles/c3.jpg" alt="c3"/>
-                <img src="/style/tiles/c4.jpg" alt="c4"/>
-                <img src="/style/tiles/c5.jpg" alt="c5"/>
-                <img src="/style/tiles/c6.jpg" alt="c6"/>
-                <img src="/style/tiles/c7.jpg" alt="c7"/>
-                <img src="/style/tiles/c8.jpg" alt="c8"/>
-                <img src="/style/tiles/c9.jpg" alt="c9"/>
+                <img src="style/tiles/c1.jpg" alt="c1"/>
+                <img src="style/tiles/c2.jpg" alt="c2"/>
+                <img src="style/tiles/c3.jpg" alt="c3"/>
+                <img src="style/tiles/c4.jpg" alt="c4"/>
+                <img src="style/tiles/c5.jpg" alt="c5"/>
+                <img src="style/tiles/c6.jpg" alt="c6"/>
+                <img src="style/tiles/c7.jpg" alt="c7"/>
+                <img src="style/tiles/c8.jpg" alt="c8"/>
+                <img src="style/tiles/c9.jpg" alt="c9"/>
                 -
                 number 1-9 plus "c" for characters or the <button>萬</button> button.</li>
               <li>
-                <img src="/style/tiles/b1.jpg" alt="b1"/>
-                <img src="/style/tiles/b2.jpg" alt="b2"/>
-                <img src="/style/tiles/b3.jpg" alt="b3"/>
-                <img src="/style/tiles/b4.jpg" alt="b4"/>
-                <img src="/style/tiles/b5.jpg" alt="b5"/>
-                <img src="/style/tiles/b6.jpg" alt="b6"/>
-                <img src="/style/tiles/b7.jpg" alt="b7"/>
-                <img src="/style/tiles/b8.jpg" alt="b8"/>
-                <img src="/style/tiles/b9.jpg" alt="b9"/>
+                <img src="style/tiles/b1.jpg" alt="b1"/>
+                <img src="style/tiles/b2.jpg" alt="b2"/>
+                <img src="style/tiles/b3.jpg" alt="b3"/>
+                <img src="style/tiles/b4.jpg" alt="b4"/>
+                <img src="style/tiles/b5.jpg" alt="b5"/>
+                <img src="style/tiles/b6.jpg" alt="b6"/>
+                <img src="style/tiles/b7.jpg" alt="b7"/>
+                <img src="style/tiles/b8.jpg" alt="b8"/>
+                <img src="style/tiles/b9.jpg" alt="b9"/>
                 -
                 number 1-9 plus "b" for bamboo or the <button>竹</button> button.</li>
               <li>
-                <img src="/style/tiles/d1.jpg" alt="d1"/>
-                <img src="/style/tiles/d2.jpg" alt="d2"/>
-                <img src="/style/tiles/d3.jpg" alt="d3"/>
-                <img src="/style/tiles/d4.jpg" alt="d4"/>
-                <img src="/style/tiles/d5.jpg" alt="d5"/>
-                <img src="/style/tiles/d6.jpg" alt="d6"/>
-                <img src="/style/tiles/d7.jpg" alt="d7"/>
-                <img src="/style/tiles/d8.jpg" alt="d8"/>
-                <img src="/style/tiles/d9.jpg" alt="d9"/>
+                <img src="style/tiles/d1.jpg" alt="d1"/>
+                <img src="style/tiles/d2.jpg" alt="d2"/>
+                <img src="style/tiles/d3.jpg" alt="d3"/>
+                <img src="style/tiles/d4.jpg" alt="d4"/>
+                <img src="style/tiles/d5.jpg" alt="d5"/>
+                <img src="style/tiles/d6.jpg" alt="d6"/>
+                <img src="style/tiles/d7.jpg" alt="d7"/>
+                <img src="style/tiles/d8.jpg" alt="d8"/>
+                <img src="style/tiles/d9.jpg" alt="d9"/>
                 -
                 number 1-9 plus "d" for dots or the <button>◎</button> button.</li>
             </ul>
@@ -65,10 +65,10 @@ var AppInstructions = React.createClass({
               <p>winds:</p>
 
               <ul>
-                <li><img src="/style/tiles/e.jpg" alt="東"/> - east: "e"</li>
-                <li><img src="/style/tiles/s.jpg" alt="南"/> - south: "s"</li>
-                <li><img src="/style/tiles/w.jpg" alt="西"/> - west: "w"</li>
-                <li><img src="/style/tiles/n.jpg" alt="北"/> - north: "n"</li>
+                <li><img src="style/tiles/e.jpg" alt="東"/> - east: "e"</li>
+                <li><img src="style/tiles/s.jpg" alt="南"/> - south: "s"</li>
+                <li><img src="style/tiles/w.jpg" alt="西"/> - west: "w"</li>
+                <li><img src="style/tiles/n.jpg" alt="北"/> - north: "n"</li>
               </ul>
             </div>
 
@@ -76,9 +76,9 @@ var AppInstructions = React.createClass({
               <p>dragons:</p>
 
               <ul>
-                <li><img src="/style/tiles/f.jpg" alt="發"/> - green dragon: "f"</li>
-                <li><img src="/style/tiles/c.jpg" alt="中"/> - red dragon: "c"</li>
-                <li><img src="/style/tiles/p.jpg" alt="□"/> - white dragon: "p"</li>
+                <li><img src="style/tiles/f.jpg" alt="發"/> - green dragon: "f"</li>
+                <li><img src="style/tiles/c.jpg" alt="中"/> - red dragon: "c"</li>
+                <li><img src="style/tiles/p.jpg" alt="□"/> - white dragon: "p"</li>
               </ul>
             </div>
 
@@ -96,10 +96,10 @@ var AppInstructions = React.createClass({
               <button>竹</button>
               <button>◎</button>
               <span className="clickthis">
-                <img src="/style/tiles/e.jpg"/>
-                <img src="/style/tiles/e.jpg"/>
-                <img src="/style/tiles/e.jpg"/>
-                <img src="/style/tiles/e.jpg"/>
+                <img src="style/tiles/e.jpg"/>
+                <img src="style/tiles/e.jpg"/>
+                <img src="style/tiles/e.jpg"/>
+                <img src="style/tiles/e.jpg"/>
               </span>
               <button>...</button>
             </div>
@@ -112,10 +112,10 @@ var AppInstructions = React.createClass({
               <button>竹</button>
               <button>◎</button>
               <span>
-                <img src="/style/tiles/concealed.jpg"/>
-                <img src="/style/tiles/concealed.jpg"/>
-                <img src="/style/tiles/concealed.jpg"/>
-                <img src="/style/tiles/e.jpg"/>
+                <img src="style/tiles/concealed.jpg"/>
+                <img src="style/tiles/concealed.jpg"/>
+                <img src="style/tiles/concealed.jpg"/>
+                <img src="style/tiles/e.jpg"/>
               </span>
               <button>...</button>
             </div>
