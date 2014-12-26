@@ -49,10 +49,14 @@ var TileBank = React.createClass({
       }
       // suitless tiles
       else {
-        tiles = tiles.split('');
-        tiles.forEach(function(face) {
-          banktiles.push({ suit: "", face: face });
-        });
+        if(tiles.match(/f\d/) || tiles.match(/s\d/)) {
+          banktiles.push({ suit: "", face: tiles });
+        } else {
+          tiles = tiles.split('');
+          tiles.forEach(function(face) {
+            banktiles.push({ suit: "", face: face });
+          });
+        }
       }
     });
     this.setState({ tiles: banktiles });

@@ -87,6 +87,7 @@ var ChineseClassical = React.createClass({
       winner: false,
       log: [],
       sets: [],
+      bonus: [],
       getHand: function() {
         return {
           winner: score.winner,
@@ -99,7 +100,7 @@ var ChineseClassical = React.createClass({
             var tiles = set.tiles.join('');
             if(set.suit) { tiles = set.suit.substring(0,1) + '.' + tiles; }
             return tiles;
-          }).join(','),
+          }).concat(score.bonus).join(','),
           log: score.log
         };
       }
@@ -170,6 +171,7 @@ var ChineseClassical = React.createClass({
       this.scoreDoubles(score, 1, "having all seasons");
     }
     // all bonus tiles is 3 doubles, but is covered by the previous computations
+    score.bonus = bonus.getBonusTileNames();
   },
 
 

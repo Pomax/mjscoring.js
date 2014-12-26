@@ -33,6 +33,16 @@ var Bonus = React.createClass({
   reset: function() { this.buttons.forEach(function(button) { button.reset(); })},
   getFlowers: function() { return this.flowers.map(function(button) { return button.isPressed(); }); },
   getSeasons: function() { return this.seasons.map(function(button) { return button.isPressed(); }); },
+  getBonusTileNames: function() {
+    var tiles = [];
+    this.buttons.forEach(function(b,idx) {
+      if(b.isPressed()) {
+        var face = (idx>3?'s':'f') + ((idx%4)+1)
+        tiles.push(face);
+      }
+    });
+    return tiles;
+  },
 
   /**
    * when a bonus tile is claimed, unpress this tile for all other players
