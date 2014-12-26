@@ -39,6 +39,14 @@ html, body {
   user-select: none;
 }
 
+input, input:focus {
+  -webkit-user-select: all;
+  -khtml-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+
 body > h1 {
   font-size:110%;
   text-align: center;
