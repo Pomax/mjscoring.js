@@ -35,9 +35,7 @@ var Game = React.createClass({
     this.rules.setPlayers(this.players);
     this.scores = this.refs.scoring;
     this.__endGame();
-
-    var hg = new HandGenerator(this.players);
-    hg.generate();
+    (new HandGenerator(this.players)).generate();
   },
 
   render: function() {
