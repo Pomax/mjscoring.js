@@ -283,6 +283,7 @@ table.scoring-area tr {
 
 table.scoring-area td {
   vertical-align: top;
+  width: 23%;
 }
 
 table.scoring-area td:nth-child(1) {
@@ -306,7 +307,6 @@ table.scoring-area .entry {
   padding: 2px;
   margin-bottom: 0.2em;
   font-size: 80%;
-  width: 28em;
   text-align: center;
 }
 
@@ -324,7 +324,6 @@ table.scoring-area .entry .info[data-winner=true]:before {
 
 table.scoring-area .entry .log {
   margin-top: 0.2em;
-  white-space: pre;
   text-align: left;
   color: #222;
   background: #DDD;
@@ -333,6 +332,7 @@ table.scoring-area .entry .log {
 
 table.scoring-area .entry .log .tilebank {
   width: 100%;
+  height: auto;
   background: inherit;
 }
 
