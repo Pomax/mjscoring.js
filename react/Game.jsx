@@ -17,17 +17,12 @@ var Game = React.createClass({
     stateRecorder.saveState();
   },
 
-  loadState: function(state) {
-    this.setState(state);
-  },
-
   componentDidMount: function() {
     stateRecorder.register(this);
     var self = this;
     this.rules = this.refs.rules;
     this.players = [ this.refs.p1, this.refs.p2, this.refs.p3, this.refs.p4 ];
     this.players.forEach(function(p, wind) {
-      p.playerId = wind;
       p.setWind(wind);
       p.useRules(self.rules);
       p.setGame(self);
@@ -56,6 +51,7 @@ var Game = React.createClass({
         </div>
 
         <div ref="buttons" className="play-buttons">
+          <Rules ref="rules" />
           <Button type="signal" ref="start" name="start" onClick={this.start}   label="New Game" />
           <Button type="signal" ref="reset" name="reset" onClick={this.reset}   label="Reset this hand" />
           <Button type="signal" ref="draw"  name="draw"  onClick={this.draw}    label="This hand is a draw" />
@@ -68,7 +64,6 @@ var Game = React.createClass({
 
         <WinModifiers ref="extras" />
         <ScoringArea ref="scoring" />
-        <Rules ref="rules" />
       </div>
     );
   },
@@ -94,6 +89,7 @@ var Game = React.createClass({
    */
   __start: function() {
     this.reset();
+    this.refs.rules.setDisabled(true);
     this.refs.start.setDisabled(true);
     this.visibles.forEach(function(ref) {
       this.refs[ref].setDisabled(false);
@@ -115,6 +111,7 @@ var Game = React.createClass({
    * helper function when ending the game, to make sure most parts of the app are disabled.
    */
   __endGame: function() {
+    this.refs.rules.setDisabled(false);
     this.refs.start.setDisabled(false);
     this.visibles.forEach(function(ref) {
       this.refs[ref].setDisabled(true);

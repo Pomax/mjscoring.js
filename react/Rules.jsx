@@ -1,21 +1,44 @@
 var Rules = React.createClass({
 
+  getInitialState: function() {
+    return {
+      selected: "cc",
+      disabled: false
+    };
+  },
+
   componentDidMount: function() {
-    this.ruleset = this.refs.current;
-    this.base = this.ruleset.base;
+    this.update({ target: { value: this.state.selected }});
+    stateRecorder.register(this);
   },
 
   render: function() {
     return (
-      <div ref="rules">
-        <ChineseClassical ref="current"/>
-      </div>
+      <span ref="rules" className="rules">
+        <ChineseClassical ref="cc" />
+        <span>Rules: </span>
+        <select ref="picker" value={this.state.selected} onChange={this.update} disabled={this.state.disabled}>
+          <option value="cc">Chinese Classical</option>
+        </select>
+      </span>
     );
   },
 
 
   // ==========================================
 
+  setDisabled: function(b) {
+    this.setState({
+      disabled: b
+    });
+  },
+
+  update: function(event) {
+    var selected = event.target.value;
+    this.ruleset = this.refs[selected];
+    this.base = this.ruleset.base;
+    this.setState({ selected: selected });
+  },
 
   setPlayers: function(players) {
     this.players = players;

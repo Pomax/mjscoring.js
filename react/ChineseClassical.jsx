@@ -42,9 +42,7 @@ var ChineseClassical = React.createClass({
   },
 
   render: function() {
-    return (
-      <div></div>
-    );
+    return <span></span>;
   },
 
   // ==========================================

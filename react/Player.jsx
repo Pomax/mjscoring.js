@@ -4,7 +4,6 @@ var Player = React.createClass({
   // that can be updated multiple times before a new render
   // occurs, which means we can't just stick it in this.state
   // and expect it to update properly.
-  playerId: 0,
   currentScore: 0,
   currentWind: 0,
 

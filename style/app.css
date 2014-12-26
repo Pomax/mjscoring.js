@@ -107,6 +107,8 @@ button.pressed {
 .game .next { opacity: 0.3; position: absolute; right: 4em; margin-top: 1em; }
 .game .next[disabled] { opacity: 0.7; }
 
+.game span.rules { display: inline-block; vertical-align: middle; }
+
 /*
   Keep the winds human readable, even if the source says they're numbers
 */
@@ -119,6 +121,10 @@ span.wind0:before { content: '東'; font-weight: bold; color: black; }
 span.wind1:before { content: '南'; font-weight: bold; color: black; }
 span.wind2:before { content: '西'; font-weight: bold; color: black; }
 span.wind3:before { content: '北'; font-weight: bold; color: black; }
+
+.game select {
+  display: inline-block;
+}
 
 /*
   Player styling
