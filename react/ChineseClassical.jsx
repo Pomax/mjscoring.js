@@ -1,24 +1,19 @@
 /**
- * I am still on the fence about whether to make this a plain JS library
- * or whether to keep this a React component. As a React component it can
- * be made to report things like limits, base points, etc. if you want to
- * compare rulesets, so I will likely keep it the way it is now, just
- * extend it with a meaningful render function rather than the stub.
+ * The neat thing about React is that rules can be <option>
+ * elements as far as the browser is concerned, while being
+ * proper objects with lots of nothing-to-do-with-<option>
+ * functions and properties. We take full advantage of this.
  */
 var ChineseClassical = React.createClass({
 
+  // TODO: refactor these to into the Rules component?
   winds: ['e', 's', 'w', 'n'],
-
   dragons: ['c', 'f', 'p'],
 
   wincount: 14,
-
   basicwin: 10,
-
   base: 2000,
-
   limit: 1000,
-
   deadwall: 16,
 
   limits: {
@@ -42,14 +37,18 @@ var ChineseClassical = React.createClass({
   },
 
   render: function() {
-    return <span></span>;
+    return <option value="cc">Chinese Classical</option>;
   },
 
   // ==========================================
 
   capLimit: function(score) {
     if(!score.limit) {
-      score.value = Math.min(score.tilepoints * Math.pow(2,score.doubles), this.limit);
+      var trueValue = score.tilepoints * Math.pow(2,score.doubles);
+      if(trueValue > this.limit) {
+        score.log.push(trueValue + " point hand limited to " + this.limit + " points");
+        score.value = this.limit;
+      } else { score.value = trueValue; }
     }
   },
 
@@ -82,12 +81,16 @@ var ChineseClassical = React.createClass({
 
   makeScoreObject: function() {
     var score = {
-      tilepoints: 0,
-      doubles: 0,
       winner: false,
       log: [],
       sets: [],
       bonus: [],
+      tilepoints: 0,
+      doubles: 0,
+      value: 0,
+      balance: 0,
+      // TODO: refactor this to something more sensible, like
+      //       moving this into the Rules component.
       getHand: function() {
         return {
           winner: score.winner,
@@ -106,47 +109,6 @@ var ChineseClassical = React.createClass({
       }
     };
     return score;
-  },
-
-  preprocess: function(score, bonus, sets, ownwind, windoftheround) {
-    var self = this;
-
-    score.sets = sets.map(function(set) {
-      var tiles = set.getTiles();
-      var tile = tiles[0];
-      var suit = set.getSuit();
-      var concealed = set.getConcealed();
-      var numeric = tiles.every(function(v) { return parseInt(v,10) == v; });
-      var terminal = numeric && tiles.every(function(v) { return v==1 || v==9; });
-      var dragon = self.dragons.indexOf(tile) > -1;
-      var same = tiles.every(function(v) { return v==tile; });
-      var pair = same && tiles.length === 2;
-      var major= same && (dragon || tile === self.winds[ownwind] || tile === self.winds[windoftheround]);
-      var pung = same && tiles.length === 3;
-      var kong = same && tiles.length === 4;
-      var ckong = set.state.ckong;
-
-      // save this information for subsequent score computing.
-      var properties = {
-        tiles: tiles,
-        tile: tile,
-        suit: suit,
-        concealed: concealed,
-        numeric: numeric,
-        terminal: terminal,
-        dragon: dragon,
-        wind: !numeric && !dragon,
-        same: same,
-        pair: pair,
-        major: major,
-        pung: pung,
-        kong: kong,
-        ckong: ckong
-      };
-
-      set.properties = properties;
-      return properties;
-    });
   },
 
   scoreBonus: function(score, bonus, ownwind, windoftheround) {

@@ -28,6 +28,7 @@
   max-height: 2em;
   border: 1px solid grey;
   vertical-align: middle;
+  margin: 1px;
 }
 .instructions td {
   text-align: center;

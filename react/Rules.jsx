@@ -15,10 +15,9 @@ var Rules = React.createClass({
   render: function() {
     return (
       <span ref="rules" className="rules">
-        <ChineseClassical ref="cc" />
         <span>Rules: </span>
-        <select ref="picker" value={this.state.selected} onChange={this.update} disabled={this.state.disabled}>
-          <option value="cc">Chinese Classical</option>
+        <select value={this.state.selected} onChange={this.update} disabled={this.state.disabled}>
+          <ChineseClassical ref="cc" />
         </select>
       </span>
     );
@@ -52,19 +51,60 @@ var Rules = React.createClass({
     return this.ruleset.rotate(wind);
   },
 
+
+  preprocess: function(score, bonus, sets, ownwind, windoftheround) {
+    var self = this;
+
+    score.sets = sets.map(function(set) {
+      var tiles = set.getTiles();
+      var tile = tiles[0];
+      var suit = set.getSuit();
+      var concealed = set.getConcealed();
+      var numeric = tiles.every(function(v) { return parseInt(v,10) == v; });
+      var terminal = numeric && tiles.every(function(v) { return v==1 || v==9; });
+      var dragon = self.ruleset.dragons.indexOf(tile) > -1;
+      var same = tiles.every(function(v) { return v==tile; });
+      var pair = same && tiles.length === 2;
+      var major= same && (dragon || tile === self.ruleset.winds[ownwind] || tile === self.ruleset.winds[windoftheround]);
+      var pung = same && tiles.length === 3;
+      var kong = same && tiles.length === 4;
+      var ckong = set.state.ckong;
+
+      // save this information for subsequent score computing.
+      var properties = {
+        tiles: tiles,
+        tile: tile,
+        suit: suit,
+        concealed: concealed,
+        numeric: numeric,
+        terminal: terminal,
+        dragon: dragon,
+        wind: !numeric && !dragon,
+        same: same,
+        pair: pair,
+        major: major,
+        pung: pung,
+        kong: kong,
+        ckong: ckong
+      };
+
+      set.properties = properties;
+      return properties;
+    });
+  },
+
   score: function(player, windoftheround, winds, extras) {
     var sets = player.getSets();
     var bonus = player.getBonus();
     var limit = player.getLimit();
     var ownwind = player.currentWind;
     var score = this.ruleset.makeScoreObject();
-
-    this.ruleset.preprocess(score, bonus, sets, ownwind, windoftheround);
+    this.preprocess(score, bonus, sets, ownwind, windoftheround);
+    // defer to the ruleset for the scoring proper
     this.ruleset.scoreBonus(score, bonus, ownwind, windoftheround);
     this.ruleset.scoreSets(score, sets, ownwind, windoftheround);
     this.ruleset.scoreWinner(score, limit, sets, ownwind, windoftheround, extras);
     this.ruleset.capLimit(score);
-
     return score;
   },
 
