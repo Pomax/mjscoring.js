@@ -13,10 +13,11 @@ var Rules = React.createClass({
   },
 
   render: function() {
+    var spanClass = (this.state.disabled ? "hidden " : '') + "rules";
     return (
-      <span ref="rules" className="rules">
+      <span ref="rules" className={spanClass}>
         <span>Rules: </span>
-        <select value={this.state.selected} onChange={this.update} disabled={this.state.disabled}>
+        <select value={this.state.selected} onChange={this.update}>
           <ChineseClassical ref="cc" />
         </select>
       </span>

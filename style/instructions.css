@@ -13,7 +13,7 @@
 .instructions {
   background: white;
   position: fixed;
-  z-index: 2;
+  z-index: 10;
   top: 4em;
   left: 4em;
   right: 4em;
