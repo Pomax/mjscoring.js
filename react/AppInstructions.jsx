@@ -30,9 +30,7 @@ var AppInstructions = React.createClass({
                 <img src="style/tiles/c6.jpg" alt="c6"/>
                 <img src="style/tiles/c7.jpg" alt="c7"/>
                 <img src="style/tiles/c8.jpg" alt="c8"/>
-                <img src="style/tiles/c9.jpg" alt="c9"/>
-                -
-                number 1-9 plus "c" for characters or the <button>萬</button> button.</li>
+                <img src="style/tiles/c9.jpg" alt="c9"/> - numbers 1 through 9, plus "c" for characters or the <button>萬</button> button.</li>
               <li>
                 <img src="style/tiles/b1.jpg" alt="b1"/>
                 <img src="style/tiles/b2.jpg" alt="b2"/>
@@ -42,9 +40,7 @@ var AppInstructions = React.createClass({
                 <img src="style/tiles/b6.jpg" alt="b6"/>
                 <img src="style/tiles/b7.jpg" alt="b7"/>
                 <img src="style/tiles/b8.jpg" alt="b8"/>
-                <img src="style/tiles/b9.jpg" alt="b9"/>
-                -
-                number 1-9 plus "b" for bamboo or the <button>竹</button> button.</li>
+                <img src="style/tiles/b9.jpg" alt="b9"/> - numbers 1 through 9, plus "b" for bamboo or the <button>竹</button> button.</li>
               <li>
                 <img src="style/tiles/d1.jpg" alt="d1"/>
                 <img src="style/tiles/d2.jpg" alt="d2"/>
@@ -54,9 +50,7 @@ var AppInstructions = React.createClass({
                 <img src="style/tiles/d6.jpg" alt="d6"/>
                 <img src="style/tiles/d7.jpg" alt="d7"/>
                 <img src="style/tiles/d8.jpg" alt="d8"/>
-                <img src="style/tiles/d9.jpg" alt="d9"/>
-                -
-                number 1-9 plus "d" for dots or the <button>◎</button> button.</li>
+                <img src="style/tiles/d9.jpg" alt="d9"/> - numbers 1 through 9, plus "d" for dots or the <button>◎</button> button.</li>
             </ul>
 
             <h2>Honour tiles</h2>
