@@ -104,7 +104,7 @@ var Game = React.createClass({
    */
   advance: function() {
     // ensure we rotate on not-east
-    this.nextHand({ currentWind: 2 });
+    this.nextHand();
   },
 
   /**
@@ -183,10 +183,19 @@ var Game = React.createClass({
    * or a round being replayed because east won, etc.
    */
   nextHand: function(winner) {
-    var direction = this.rules.rotate(winner.currentWind);
+    var direction = this.rules.rotate(winner ? winner.currentWind : this.state.currentWind);
     var currentWOTR = this.state.windoftheround;
-    var finished = this.state.finished;
-    if(winner && direction) {
+
+    if(this.state.finished) {
+      // if the game is already finished,
+      // this is essentially a noop.
+      return this.setState({
+        hand: this.state.hand + ' played',
+        windoftheround: 'none, this game is finished.'
+      }, this.cache);
+    }
+
+    if(direction) {
       this.players.forEach(function(p) {
          p.nextWind(direction);
       });
@@ -203,19 +212,11 @@ var Game = React.createClass({
       }
     }
 
-    if(finished) {
-      this.setState({
-        hand: this.state.hand + ' played',
-        windoftheround: 'none, this game is finished.',
-        finished: true
-      }, this.cache);
-    } else {
-      this.reset();
-      this.setState({
-        windoftheround: currentWOTR,
-        hand: this.state.hand + 1
-      }, this.cache);
-    }
+    this.reset();
+    this.setState({
+      windoftheround: currentWOTR,
+      hand: this.state.hand + 1
+    }, this.cache);
   }
 
 });
