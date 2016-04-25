@@ -40,7 +40,7 @@ var Game = React.createClass({
       <div className="game">
 
         <div ref="info">
-          Hand: {this.state.hand} ({this.state.draws } draws) Wind of the round: <span className={wotrclass}>{this.state.windoftheround}</span>
+          Hand: {this.state.hand} ({this.state.draws } draw{ this.state.draws===1 ? '' : 's' }) Wind of the round: <span className={wotrclass}>{this.state.windoftheround}</span>
         </div>
 
         <div ref="players">
