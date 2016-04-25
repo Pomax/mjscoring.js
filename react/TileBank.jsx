@@ -21,7 +21,7 @@ var TileBank = React.createClass({
       var key = tile.suit + tile.face + idx + (ic?'ic':'');
       return <Tile suit={suit} face={face} key={key}/>
     });
-    return <div className="tilebank" onClick={this.props.bankpress}>{tiles}</div>;
+    return <div className="tilebank" onClick={this.props.onClick}>{tiles}</div>;
   },
 
 

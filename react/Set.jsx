@@ -25,7 +25,7 @@ var Set = React.createClass({
         <Button ref="characters" name="characters" onClick={this.press} label="萬" />
         <Button ref="bamboo"     name="bamboo"     onClick={this.press} label="竹" />
         <Button ref="dots"       name="dots"       onClick={this.press} label="◎" />
-        <TileBank ref="tilebank" concealed={this.state.ckong} bankpress={this.bankpress}/>
+        <TileBank ref="tilebank" concealed={this.state.ckong} onClick={this.bankpress}/>
         <Button ref="concealed"  name="concealed"  label="..." />
       </div>
     );
@@ -36,7 +36,7 @@ var Set = React.createClass({
 
 
   reset: function() {
-    this.setState({ set: '' });
+    this.setState(this.getInitialState());
     this.resets.forEach(function(ref) {
       this.refs[ref].reset();
     }.bind(this));
