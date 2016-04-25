@@ -9,10 +9,11 @@ var ScoringArea = React.createClass({
   },
 
   render: function() {
+    var last = this.state.entries.length - 1;
     var rows = this.state.entries.map(function(entry, idx) {
-      return <ScoringRow scores={entry.scores} hand={entry.hand} windoftheround={entry.wotr} key={idx} showdetails={idx===0}/>;
+      return <ScoringRow key={'row-' + idx} scores={entry.scores} hand={entry.hand} windoftheround={entry.wotr} showdetails={idx===last} row={idx}/>;
     });
-    return <table ref="scoring" className="scoring-area">{rows}</table>;
+    return <table ref="scoring" className="scoring-area">{rows.reverse()}</table>;
   },
 
 
@@ -26,7 +27,7 @@ var ScoringArea = React.createClass({
       wotr: windoftheround
     };
     this.setState({
-      entries: ([entry]).concat(this.state.entries)
+      entries: this.state.entries.concat([entry])
     });
   }
 

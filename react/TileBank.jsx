@@ -18,7 +18,7 @@ var TileBank = React.createClass({
       var ic = (idx!==3 && concealed);
       var suit = ic ? '' : tile.suit;
       var face = ic ? "concealed" : tile.face;
-      var key = tile.suit + tile.face + idx + (ic?'ic':'');
+      var key = tile.suit + tile.face + '-' + idx + (ic?'ic':'');
       return <Tile suit={suit} face={face} key={key}/>
     });
     return <div className="tilebank" onClick={this.props.onClick}>{tiles}</div>;

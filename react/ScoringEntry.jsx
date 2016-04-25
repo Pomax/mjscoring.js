@@ -2,7 +2,7 @@ var ScoringEntry = React.createClass({
 
   render: function() {
     var data = this.props.data;
-    var tilebank = data.tiles ? <TileBank ref="tilebank" handtiles={data.tiles} /> : '';
+    var tilebank = data.tiles ? <TileBank ref="tilebank" handtiles={data.tiles} owner={this.props.cell} /> : '';
     var logClass = (this.props.showlog ? '' : "hidden ") + "log";
     return (
       <div className="entry">
